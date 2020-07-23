@@ -1,0 +1,47 @@
+{
+  "name": "backbone-leviathan",
+  "version": "1.0.0",
+  "description": "experimental rework on backbonejs library that expands default functionality",
+  "types": "./@types/backbone-leviathan.d.ts",
+  "scripts": {
+    "build": "tsnode ./scripts/build",
+    "test": "tsnode ./scripts/test",
+    "coverage": "tsnode ./scripts/test -- --coverage",
+    "release": "tsnode ./scripts/release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nahuelio/backbone-leviathan.git"
+  },
+  "keywords": [
+    "leviathan",
+    "backbonejs",
+    "incrementaldom",
+    "reactive"
+  ],
+  "author": "Patricio Ferreira <3dimentionar@gmail.com>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/nahuelio/backbone-leviathan/issues"
+  },
+  "homepage": "https://github.com/nahuelio/backbone-leviathan#readme",
+  "dependencies": {
+    "incremental-dom": "0.7.0"
+  },
+  "devDependencies": {
+    "@types/backbone": "1.4.3",
+    "@types/chai": "4.2.12",
+    "@types/mocha": "8.0.0",
+    "@types/sinon": "9.0.4",
+    "@types/underscore": "1.10.12",
+    "backbone": "1.4.0",
+    "underscore": "1.10.2",
+    "chai": "4.2.0",
+    "eslint": "7.5.0",
+    "mocha": "8.0.1",
+    "nyc": "15.1.0",
+    "sinon": "9.0.2",
+    "ts-node": "8.10.2",
+    "typescript": "3.9.7"
+  }
+}
