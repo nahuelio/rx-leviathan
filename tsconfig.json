@@ -1,20 +1,26 @@
 {
-  "compilerOptions": {
-	"target": "es5",
-	"module": "ESNext",
-	"allowJs": false,
-	"strict": true,
-    "baseUrl": "./",
-	"paths": {
-      "lib": ["./lib"],
-	  "test": ["./test"],
-	  "scripts": ["./scripts"]
+	"compilerOptions": {
+		"target": "es5",
+		"module": "esnext",
+		"moduleResolution": "node",
+		"lib": ["dom", "es6", "es5"],
+		"allowJs": false,
+		"strict": true,
+		"baseUrl": "./",
+		"sourceMap": true,
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true
 	},
-	"sourceMap": true,
-	"esModuleInterop": true,
-	"experimentalDecorators": true,
-	"emitDecoratorMetadata": true,
-	"skipLibCheck": true,
-	"forceConsistentCasingInFileNames": true
-  }
+	"include": [
+		"./lib/*.ts",
+		"./lib/**/*.ts"
+	],
+	"exclude": [
+		"./test/*.ts",
+		"./test/**/*.ts"
+	],
+	"compileOnSave": false
 }

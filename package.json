@@ -2,12 +2,28 @@
   "name": "backbone-leviathan",
   "version": "1.0.0",
   "description": "experimental rework on backbonejs library that expands default functionality",
-  "types": "./@types/backbone-leviathan.d.ts",
+  "types": "@types/index.d.ts",
   "scripts": {
-    "build": "tsnode ./scripts/build",
-    "test": "tsnode ./scripts/test",
-    "coverage": "tsnode ./scripts/test -- --coverage",
-    "release": "tsnode ./scripts/release"
+    "build": "tsnode ./scripts/build.ts",
+    "test": "cross-env NODE_ENV=test TS_NODE_COMPILER_OPTIONS='{ \"module\": \"commonjs\" }' _mocha --config .mocharc.js --watch test/unit",
+    "coverage": "cross-env NODE_ENV=test TS_NODE_COMPILER_OPTIONS='{ \"module\": \"commonjs\" }' nyc _mocha --config .mocharc.js test/unit",
+    "release": "cross-env NODE_ENV=prod npm run build & tsnode ./scripts/release.ts"
+  },
+  "nyc": {
+    "include": [
+      "lib/**/*.ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "reporter": [
+      "lcov"
+    ],
+    "sourceMap": true,
+    "instrument": true
   },
   "repository": {
     "type": "git",
@@ -32,16 +48,20 @@
     "@types/backbone": "1.4.3",
     "@types/chai": "4.2.12",
     "@types/mocha": "8.0.0",
+    "@types/node": "14.0.24",
     "@types/sinon": "9.0.4",
     "@types/underscore": "1.10.12",
     "backbone": "1.4.0",
-    "underscore": "1.10.2",
     "chai": "4.2.0",
+    "cross-env": "7.0.2",
     "eslint": "7.5.0",
+    "jsdom": "16.3.0",
+    "jsdom-global": "3.0.2",
     "mocha": "8.0.1",
     "nyc": "15.1.0",
     "sinon": "9.0.2",
     "ts-node": "8.10.2",
-    "typescript": "3.9.7"
+    "typescript": "3.9.7",
+    "underscore": "1.10.2"
   }
 }
