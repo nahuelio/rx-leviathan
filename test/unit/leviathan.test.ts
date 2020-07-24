@@ -3,8 +3,9 @@ import Backbone from '../../lib/leviathan';
 
 describe('Leviathan Core', function() {
 	it('should verify leviathan package information', () => {
-		assert.equal(Backbone.Leviathan.name, process.env.npm_package_name);
-		assert.equal(Backbone.Leviathan.version, process.env.npm_package_version);
+		assert.equal(Backbone.Leviathan.__name__, process.env.npm_package_name);
+		assert.equal(Backbone.Leviathan.__version__, process.env.npm_package_version);
+		assert.exists(Backbone.Leviathan.get);
 	});
 
 	it('should verify leviathan store module', () => {
