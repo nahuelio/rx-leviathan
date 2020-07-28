@@ -1,0 +1,8 @@
+{
+	"public": "../..",
+	"rewrites": [
+		{ "source": "/leviathan", "destination": "dist/backbone-leviathan.min.js" },
+		{ "source": "/leviathan-dev", "destination": "dist/backbone-leviathan.js" },
+		{ "source": "/:id", "destination": "test/integration/:id.html" }
+	]
+}

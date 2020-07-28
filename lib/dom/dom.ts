@@ -2,7 +2,7 @@
  * Backbone Leviathan DOM
  * @author Patricio Ferreira <3dimentionar@gmail.com>
  */
-import { DOMView, Maybe } from 'leviathan';
+import { DOMView, IStore, Props, Maybe } from 'leviathan';
 
 /**
  * Class DOM
@@ -10,12 +10,16 @@ import { DOMView, Maybe } from 'leviathan';
  */
 export default class DOM {
 	/**
-	 * Factory View Method
+	 * Factory for instantiating JSX.LeviathanElement
 	 * @param name
 	 * @param props
 	 * @param children
 	 */
-	public static create(name: string, props = {}, children = {}): Maybe<DOMView> {
+	public static create<P extends Props<{}>, S extends IStore<{}>>(
+		name: JSX.LeviathanElementSignature,
+		props: Maybe<P>,
+		children?: DOM
+	): Maybe<DOMView<P, S>> {
 		// TODO
 		return null;
 	}

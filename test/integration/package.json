@@ -1,0 +1,23 @@
+{
+  "name": "integration",
+  "version": "1.0.0",
+  "description": "backbone leviathan integration testing",
+  "scripts": {
+    "start": "serve --debug"
+  },
+  "repository": {
+    "type": "git",
+    "url": "none"
+  },
+  "keywords": [
+    "backbone",
+    "leviathan",
+    "integration",
+    "testing"
+  ],
+  "author": "Patricio Ferreira <3dimentionar@gmail.com>",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "serve": "11.3.2"
+  }
+}

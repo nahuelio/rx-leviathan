@@ -3,44 +3,56 @@
  * @module leviathan
  * @version 1.0.0
  */
+/// <reference path="./leviathan-jsx.d.ts" />
 declare module 'leviathan' {
 	/**
-	 * Helper type that considers T, null or undefined as possible return types.
+	 * Helper type that considers T as possibly null
 	 */
 	export type Maybe<T> = T | null;
 
+	/**
+	 * @type State
+	 */
 	export type State<T> = {
 		[P in keyof T]: any;
 	}
 
-	export type Actions<A> = {
-		[P in keyof A]: ReturnType<any>;
-	} & ThisType<IStore>;
+	/**
+	 * @type Props
+	 */
+	export type Props<T> = {
+		[P in keyof T]: any;
+	}
+
+	/** Store Module **/
 
 	/**
 	 * @interface Store
 	 * @instance
 	 */
-	export interface IStore<T extends State<T>, A extends Actions<A>> {
+	export interface IStore<T extends State<T>> {
+		[key: Extract<keyof Omit<IStore<T>, 'state' | 'dispatch'>, string>]: Function;
 		readonly state: T;
-		readonly actions: A;
-		dispatch(name: Extract<keyof A, string>, ...params: any[]): IStore<T, A>;
+		dispatch(name: keyof Omit<IStore<T>, 'state' | 'dispatch'>, ...params: any[]): IStore<T>;
 	}
+
+	/** DOM Module **/
 
 	/**
 	 * @interface DOMView
 	 * @instance
 	 */
-	export interface DOMView {
-		// TODO
+	export interface DOMView<P extends Props<{}>, S extends IStore<{}>> {
+		readonly props: P;
+		readonly store: S;
+		render(): JSX.LeviathanElement;
 	}
 
 	/**
 	 * @interface DOM
 	 */
 	export interface DOM {
-		factory: { [P in keyof HTMLElementTagNameMap]: ReturnType<HTMLElementTagNameMap<P>> };
-		create: (name: string, props?: object, children?: DOM) => Maybe<DOMView>;
+		create: (name: JSX.LeviathanElementSignature, props?: Maybe<Props>, children?: DOM) => Maybe<DOMView<Props, IStore>>;
 	}
 
 	/**

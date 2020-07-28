@@ -2,42 +2,38 @@
  * Backbone Leviathan Store
  * @author Patricio Ferreira <3dimentionar@gmail.com>
  */
-import { IStore, State, Actions, Maybe } from 'leviathan';
+import { IStore, State, Maybe } from 'leviathan';
+import _ from 'underscore';
 
 /**
  * Store Class
  * @class Store
  */
-class Store<T extends State<T>, A extends Actions<A>> implements IStore<T, A> {
+class Store<T extends State<T>> implements IStore<T> {
 	/**
 	 * State
 	 * @property state
 	 */
-	readonly state: State<T> = {} as T;
-
-	/**
-	 * Actions
-	 * @property actions
-	 */
-	readonly actions: Actions<A> = {} as A;
+	readonly state: State<T> = {} as State<T>;
 
 	/**
 	 * @constructor
-	 * @param {Maybe<T>} state
-	 * @param {Maybe<A>} actions
+	 * @param {Maybe<State<T>>} initial
 	 */
-	constructor(state?: Maybe<T>, actions?: Maybe<A>) {
-		Object.assign(this, { state: state || {}, actions: actions || {} });
+	constructor(initial?: Maybe<State<T>>) {
+		Object.assign(this, { state: initial || {} });
 	}
 
 	/**
-	 * Dispatch an action with given parameters
-	 * @param {Extract<keyof A, 'string'>}name
+	 * Dispatch an action with given set of parameters.
+	 * @param {string} name
 	 * @param {any[]} params
 	 * @returns StoreInstance<T, A>
 	 */
-	dispatch(name: Extract<keyof A, string>, ...params: any[]): IStore<T, A> {
-		this.actions[name](...params);
+	dispatch(name: keyof Omit<Store<T>, 'state' | 'dispatch'>, ...params: any[]): IStore<T> {
+		if (_.has(this, name) && _.isFunction(this[name])) {
+			(this[name] as Function)(...params);
+		}
 		return this;
 	}
 }

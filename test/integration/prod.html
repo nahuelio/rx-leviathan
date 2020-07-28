@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Backbone Leviathan - Production Build</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.10.2/underscore-min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.4.0/backbone-min.js"></script>
+	</head>
+	<body>
+		<div class="app"></div>
+		<script type="module">
+			import('/leviathan').then(() => {
+				console.log('[PROD BUILD]');
+				console.log(Backbone);
+				console.log(Backbone.Leviathan);
+			});
+		</script>
+	</body>
+</html>
