@@ -59,8 +59,8 @@ declare module 'leviathan' {
 	 * @interface Core
 	 */
 	export interface Core {
-		readonly __name__: string;
-		readonly __version__: string;
+		readonly NAME: string;
+		readonly VERSION: string;
 		get<R>(path: string): R;
 	}
 
