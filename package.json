@@ -1,81 +1,19 @@
 {
   "name": "backbone-leviathan",
   "version": "1.0.0",
-  "description": "experimental rework on backbonejs library that expands default functionality",
-  "main": "dist/backbone-leviathan.min.js",
-  "types": "@types/index.d.ts",
-  "scripts": {
-    "dev": "rollup -c --watch",
-    "build": "rollup -c",
-    "test": "cross-env NODE_ENV=test TS_NODE_COMPILER_OPTIONS='{ \"module\": \"commonjs\" }' _mocha --config .mocharc.js --watch test/unit",
-    "coverage": "cross-env NODE_ENV=test TS_NODE_COMPILER_OPTIONS='{ \"module\": \"commonjs\" }' nyc _mocha --config .mocharc.js test/unit",
-    "release": "cross-env NODE_ENV=prod npm run build & tsnode ./release.ts"
-  },
-  "nyc": {
-    "include": [
-      "lib/**/*.ts"
-    ],
-    "require": [
-      "ts-node/register"
-    ],
-    "extension": [
-      ".ts"
-    ],
-    "reporter": [
-      "lcov"
-    ],
-    "sourceMap": true,
-    "instrument": true
-  },
+  "description": "lerna backbone experimental projects",
+  "main": "packages/backbone-leviathan/dist/backbone-leviathan.min.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nahuelio/backbone-leviathan.git"
   },
-  "keywords": [
-    "leviathan",
-    "backbonejs",
-    "incrementaldom",
-    "reactive"
-  ],
   "author": "Patricio Ferreira <3dimentionar@gmail.com>",
   "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/nahuelio/backbone-leviathan/issues"
   },
   "homepage": "https://github.com/nahuelio/backbone-leviathan#readme",
-  "dependencies": {
-    "incremental-dom": "0.7.0"
-  },
-  "files": [
-    "@types",
-    "dist",
-    "LICENSE",
-    "README.md"
-  ],
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "8.4.0",
-    "@rollup/plugin-typescript": "5.0.2",
-    "@types/backbone": "1.4.3",
-    "@types/chai": "4.2.12",
-    "@types/mocha": "8.0.0",
-    "@types/node": "14.0.24",
-    "@types/sinon": "9.0.4",
-    "@types/underscore": "1.10.12",
-    "backbone": "1.4.0",
-    "chai": "4.2.0",
-    "cross-env": "7.0.2",
-    "eslint": "7.5.0",
-    "jsdom": "16.3.0",
-    "jsdom-global": "3.0.2",
-    "mocha": "8.0.1",
-    "nyc": "15.1.0",
-    "rollup": "2.23.0",
-    "rollup-plugin-replace": "2.2.0",
-    "rollup-plugin-terser": "6.1.0",
-    "sinon": "9.0.2",
-    "ts-node": "8.10.2",
-    "tslib": "2.0.0",
-    "typescript": "3.9.7",
-    "underscore": "1.10.2"
+    "lerna": "3.22.1"
   }
 }

@@ -1,0 +1,37 @@
+{
+  "name": "@nahuelio/backbone-leviathan-examples",
+  "version": "1.0.0",
+  "description": "backbone leviathan examples",
+  "keywords": [
+    "leviathan",
+    "backbonejs",
+    "incrementaldom",
+    "examples"
+  ],
+  "author": "Patricio Ferreira <3dimentionar@gmail.com>",
+  "homepage": "https://github.com/nahuelio/backbone-leviathan/tree/master/packages/backbone-leviathan-examples#readme",
+  "license": "UNLICENSED",
+  "main": "live-server.js",
+  "directories": {
+    "lib": "public"
+  },
+  "files": [
+	  "public"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nahuelio/backbone-leviathan.git"
+  },
+  "scripts": {
+    "start": "node live-server.js"
+  },
+  "bugs": {
+    "url": "https://github.com/nahuelio/backbone-leviathan/issues"
+  },
+  "devDependencies": {
+    "live-server": "1.2.1"
+  }
+}
