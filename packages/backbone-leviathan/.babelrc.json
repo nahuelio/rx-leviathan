@@ -3,23 +3,20 @@
 		[
 			"@babel/preset-env",
 			{
-				"targets": {
-					"esmodules": true
-				},
-				"modules": "umd",
+				"useBuiltIns": "usage",
 				"corejs": "3"
 			}
 		]
 	],
 	"plugins": [
+		"@babel/plugin-proposal-class-properties",
 		[
 			"@babel/plugin-transform-runtime",
 			{
 				"absoluteRuntime": false,
 				"corejs": "3",
 				"helpers": true,
-				"regenerator": true,
-				"useESModules": true
+				"regenerator": true
 			}
 		]
 	]

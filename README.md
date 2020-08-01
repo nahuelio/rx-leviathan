@@ -1,3 +1,3 @@
-# Backbone BackboneLeviathan
+# Backbone Leviathan
 
-Experimental rework on backbonejs library using other libraries to expand functionality.
+Experimental rework on backbone js library using other libraries to expand functionality.

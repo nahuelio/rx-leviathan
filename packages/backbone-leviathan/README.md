@@ -1,11 +1,14 @@
-# `@nahuelio/backbone-leviathan`
+# Backbone Leviathan
+
+##### `@nahuelio/backbone-leviathan`
 
 > TODO: description
 
 ## Usage
 
-```
-const backboneLeviathan = require('@nahuelio/backbone-leviathan');
+TODO
 
-// TODO: DEMONSTRATE API
-```
+---
+LICENSE Information (Link)
+<br />
+Made with :heart: by [Nahuel IO](http://nahuel.io/)

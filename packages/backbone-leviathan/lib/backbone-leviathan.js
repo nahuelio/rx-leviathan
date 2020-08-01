@@ -8,14 +8,14 @@
  * 	* Store: will provide a Model in the form of Observables
  */
 import Backbone from 'backbone';
-import query from './core/core';
-import DOM from './dom/dom';
-import Store from './store/store';
+import { Core } from './core/core';
+import { DOM } from './dom/dom';
+import { Store } from './store/store';
 
 export const Leviathan = {
 	NAME: process.env.npm_package_name,
 	VERSION: process.env.npm_package_version,
-	...query,
+	...Core,
 	Store,
 	DOM
 };
