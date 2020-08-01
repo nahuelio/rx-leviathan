@@ -1,5 +1,5 @@
 const environment = process.env.ENV || 'dev';
-const { output, plugins } = require(`./config/${environment}`);
+const { output, plugins, watch } = require(`./config/${environment}`);
 
 export default {
 	input: { 'backbone-leviathan': './lib/backbone-leviathan.js' },
@@ -9,5 +9,6 @@ export default {
 		'process',
 		'underscore',
 		'backbone'
-	]
+	],
+	watch
 }

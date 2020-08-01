@@ -10,5 +10,6 @@ module.exports = {
 		entryFileNames: '[name].min.js',
 		plugins: [terser()]
 	}),
-	plugins: [...plugins]
+	plugins: [...plugins],
+	watch: false
 };

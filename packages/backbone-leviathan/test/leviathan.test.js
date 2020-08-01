@@ -1,18 +1,17 @@
-import { assert } from 'chai';
-import Backbone from '..';
+import { Leviathan } from '../lib/backbone-leviathan';
 
-describe('BackboneLeviathan Core', function() {
+describe('Leviathan.Core', () => {
 	it('should verify leviathan package information', () => {
-		assert.equal(Backbone.Leviathan.__name__, process.env.npm_package_name);
-		assert.equal(Backbone.Leviathan.__version__, process.env.npm_package_version);
-		assert.exists(Backbone.Leviathan.get);
+		assert.equal(Leviathan.NAME, process.env.npm_package_name);
+		assert.equal(Leviathan.VERSION, process.env.npm_package_version);
+		assert.exists(Leviathan.get);
 	});
 
 	it('should verify leviathan store module', () => {
-		assert.exists(Backbone.Leviathan.Store);
+		assert.exists(Leviathan.Store);
 	});
 
 	it('should verify leviathan DOM module', () => {
-		assert.exists(Backbone.Leviathan.DOM);
+		assert.exists(Leviathan.DOM);
 	});
 });

@@ -1,125 +1,191 @@
-import _Object$defineProperty from '@babel/runtime-corejs3/core-js-stable/object/define-property';
-import _Object$defineProperties from '@babel/runtime-corejs3/core-js-stable/object/define-properties';
-import _Object$getOwnPropertyDescriptors from '@babel/runtime-corejs3/core-js-stable/object/get-own-property-descriptors';
-import _forEachInstanceProperty from '@babel/runtime-corejs3/core-js-stable/instance/for-each';
-import _Object$getOwnPropertyDescriptor from '@babel/runtime-corejs3/core-js-stable/object/get-own-property-descriptor';
-import _filterInstanceProperty from '@babel/runtime-corejs3/core-js-stable/instance/filter';
-import _Object$getOwnPropertySymbols from '@babel/runtime-corejs3/core-js-stable/object/get-own-property-symbols';
-import _Object$keys from '@babel/runtime-corejs3/core-js-stable/object/keys';
-import _Object$assign from '@babel/runtime-corejs3/core-js-stable/object/assign';
-import _defineProperty from '@babel/runtime-corejs3/helpers/defineProperty';
-import Backbone from 'backbone';
-import _classCallCheck from '@babel/runtime-corejs3/helpers/classCallCheck';
-import _createClass from '@babel/runtime-corejs3/helpers/createClass';
-import _ from 'underscore';
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('backbone'), require('underscore')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'backbone', 'underscore'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global['backbone-leviathan'] = {}, global.Backbone, global._));
+}(this, (function (exports, Backbone, _) { 'use strict';
 
-/**
- * BackboneLeviathan Core
- * @author Patricio Ferreira <3dimentionar@gmail.com>
- */
-var Core = {
-  get: function get() {
-    // dot notation query
-    return null;
-  }
-};
+  Backbone = Backbone && Object.prototype.hasOwnProperty.call(Backbone, 'default') ? Backbone['default'] : Backbone;
+  _ = _ && Object.prototype.hasOwnProperty.call(_, 'default') ? _['default'] : _;
 
-/**
- * Backbone BackboneLeviathan DOM
- * @author Patricio Ferreira <3dimentionar@gmail.com>
- */
-
-/**
- * Class DOM
- * @class DOM
- */
-var DOM = /*#__PURE__*/function () {
-  function DOM() {
-    _classCallCheck(this, DOM);
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
   }
 
-  _createClass(DOM, null, [{
-    key: "create",
+  function _defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
 
-    /**
-     * Factory for instantiating JSX.LeviathanElement
-     * @param name
-     * @param props
-     * @param children
-     */
-    value: function create(name, props, children) {
-      // TODO
+  function _createClass(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties(Constructor, staticProps);
+    return Constructor;
+  }
+
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
+  function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
+
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      if (enumerableOnly) symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      });
+      keys.push.apply(keys, symbols);
+    }
+
+    return keys;
+  }
+
+  function _objectSpread2(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
+
+      if (i % 2) {
+        ownKeys(Object(source), true).forEach(function (key) {
+          _defineProperty(target, key, source[key]);
+        });
+      } else if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+      } else {
+        ownKeys(Object(source)).forEach(function (key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+      }
+    }
+
+    return target;
+  }
+
+  /**
+   * BackboneLeviathan Core
+   * @author Patricio Ferreira <3dimentionar@gmail.com>
+   */
+  var Core = {
+    get: function get() {
+      // dot notation query
       return null;
     }
-  }]);
+  };
 
-  return DOM;
-}();
-
-/**
- * Store Class
- * @class Store
- */
-
-var Store = /*#__PURE__*/function () {
   /**
-   * State
-   * @property state
+   * Backbone BackboneLeviathan DOM
+   * @author Patricio Ferreira <3dimentionar@gmail.com>
    */
 
   /**
-   * @constructor
-   * @param {Maybe<State<T>>} initial
+   * Class DOM
+   * @class DOM
    */
-  function Store(initial) {
-    _classCallCheck(this, Store);
+  var DOM = /*#__PURE__*/function () {
+    function DOM() {
+      _classCallCheck(this, DOM);
+    }
 
-    _defineProperty(this, "state", void 0);
+    _createClass(DOM, null, [{
+      key: "create",
 
-    _Object$assign(this, {
-      state: initial || {}
-    });
-  }
+      /**
+       * Factory for instantiating JSX.LeviathanElement
+       * @param name
+       * @param props
+       * @param children
+       */
+      value: function create(name, props, children) {
+        // TODO
+        return null;
+      }
+    }]);
+
+    return DOM;
+  }();
+
   /**
-   * Dispatch an action with given set of parameters.
-   * @param {string} name
-   * @param {any[]} params
-   * @returns StoreInstance<T, A>
+   * Store Class
+   * @class Store
    */
 
+  var Store = /*#__PURE__*/function () {
+    /**
+     * State
+     * @property state
+     */
 
-  _createClass(Store, [{
-    key: "dispatch",
-    value: function dispatch(name) {
-      if (_.has(this, name) && _.isFunction(this[name])) {
-        for (var _len = arguments.length, params = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-          params[_key - 1] = arguments[_key];
+    /**
+     * @constructor
+     * @param {Maybe<State<T>>} initial
+     */
+    function Store(initial) {
+      _classCallCheck(this, Store);
+
+      _defineProperty(this, "state", void 0);
+
+      Object.assign(this, {
+        state: initial || {}
+      });
+    }
+    /**
+     * Dispatch an action with given set of parameters.
+     * @param {string} name
+     * @param {any[]} params
+     * @returns StoreInstance<T, A>
+     */
+
+
+    _createClass(Store, [{
+      key: "dispatch",
+      value: function dispatch(name) {
+        if (_.has(this, name) && _.isFunction(this[name])) {
+          for (var _len = arguments.length, params = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+            params[_key - 1] = arguments[_key];
+          }
+
+          this[name].apply(this, params);
         }
 
-        this[name].apply(this, params);
+        return this;
       }
+    }]);
 
-      return this;
-    }
-  }]);
+    return Store;
+  }();
 
-  return Store;
-}();
+  var Leviathan = _objectSpread2(_objectSpread2({
+    NAME: "@nahuelio/backbone-leviathan",
+    VERSION: "1.0.0"
+  }, Core), {}, {
+    Store: Store,
+    DOM: DOM
+  });
+  var backboneLeviathan = Object.assign(Backbone, {
+    Leviathan: Leviathan
+  });
 
-function ownKeys(object, enumerableOnly) { var keys = _Object$keys(object); if (_Object$getOwnPropertySymbols) { var symbols = _Object$getOwnPropertySymbols(object); if (enumerableOnly) symbols = _filterInstanceProperty(symbols).call(symbols, function (sym) { return _Object$getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+  exports.Leviathan = Leviathan;
+  exports.default = backboneLeviathan;
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { var _context; _forEachInstanceProperty(_context = ownKeys(Object(source), true)).call(_context, function (key) { _defineProperty(target, key, source[key]); }); } else if (_Object$getOwnPropertyDescriptors) { _Object$defineProperties(target, _Object$getOwnPropertyDescriptors(source)); } else { var _context2; _forEachInstanceProperty(_context2 = ownKeys(Object(source))).call(_context2, function (key) { _Object$defineProperty(target, key, _Object$getOwnPropertyDescriptor(source, key)); }); } } return target; }
-var Leviathan = _objectSpread(_objectSpread({
-  NAME: "@nahuelio/backbone-leviathan",
-  VERSION: "1.0.0"
-}, Core), {}, {
-  Store: Store,
-  DOM: DOM
-});
-var backboneLeviathan = _Object$assign(Backbone, {
-  Leviathan: Leviathan
-});
+  Object.defineProperty(exports, '__esModule', { value: true });
 
-export default backboneLeviathan;
-export { Leviathan };
+})));
 //# sourceMappingURL=backbone-leviathan.js.map

@@ -8,5 +8,6 @@ module.exports = {
 	output: Object.assign(output, {
 		entryFileNames: '[name].js'
 	}),
-	plugins: [...plugins]
+	plugins: [...plugins],
+	watch: true
 };

@@ -1,0 +1,7 @@
+{
+	"watch": [
+		"./config/*.js",
+		"rollup.config.js",
+		".babelrc.json"
+	]
+}

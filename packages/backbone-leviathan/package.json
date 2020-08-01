@@ -28,8 +28,8 @@
     "url": "git+https://github.com/nahuelio/backbone-leviathan.git"
   },
   "scripts": {
-    "dev": "rollup -c --watch",
-    "build": "cross-env ENV=prod rollup -c",
+    "dev": "nodemon --exec \"rollup -c -w\"",
+    "build": "cross-env ENV=prod rollup -c && bundlewatch",
     "test": "cross-env ENV=test mocha --config .mocharc.js --watch",
     "coverage": "cross-env ENV=test nyc mocha --config ./.mocharc.js",
     "release": "npm run build && babel-node release.js"
@@ -53,6 +53,14 @@
     "sourceMap": true,
     "instrument": true
   },
+  "bundlewatch": {
+    "files": [
+      {
+        "path": "./dist/backbone-leviathan.min.js",
+        "maxSize": "30kB"
+      }
+    ]
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -60,18 +68,24 @@
     "@babel/cli": "7.10.5",
     "@babel/core": "7.11.0",
     "@babel/node": "7.10.5",
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-class-properties": "7.10.4",
+    "@babel/plugin-proposal-decorators": "7.10.5",
     "@babel/plugin-transform-runtime": "7.11.0",
     "@babel/preset-env": "7.11.0",
     "@babel/register": "7.10.5",
+    "@babel/runtime-corejs3": "7.11.0",
     "@rollup/plugin-babel": "5.1.0",
+    "@rollup/plugin-commonjs": "14.0.0",
+    "@rollup/plugin-node-resolve": "8.4.0",
     "backbone": "1.4.0",
+    "bundlewatch": "0.2.7",
     "chai": "4.2.0",
     "core-js": "3.6.5",
     "cross-env": "7.0.2",
     "jsdom": "16.3.0",
     "jsdom-global": "3.0.2",
     "mocha": "8.1.0",
+    "nodemon": "2.0.4",
     "nyc": "15.1.0",
     "rollup": "2.23.0",
     "rollup-plugin-replace": "2.2.0",

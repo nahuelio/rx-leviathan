@@ -10,7 +10,7 @@ module.exports = {
 	timeout: 2000,
 	ui: 'bdd',
 	global: ['chai', 'sinon'],
-	require: ['ts-node/register', 'jsdom-global/register'],
+	require: ['@babel/register', 'jsdom-global/register', './test/setup.js'],
 	spec: 'test/**/*.test.js',
-	'watch-files': ['public/*.js', 'public/**/*.js', 'test/*.js', 'test/**/*.js']
+	'watch-files': ['lib/**/*.js', 'test/**/*.js']
 };

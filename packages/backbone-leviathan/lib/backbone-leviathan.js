@@ -2,10 +2,7 @@
  * Backbone Leviathan
  * @author Patricio Ferreira <3dimentionar@gmail.com>
  * @description
- * 	Leviathan is an experimental expansion that augments Backbone namespace
- * 	by adding 2 new modules:
- * 	* DOM: will provide with incremental-dom capabilities to make use of JSX within Views
- * 	* Store: will provide a Model in the form of Observables
+ * 	Leviathan is an experimental expansion that augments Backbone namespace.
  */
 import Backbone from 'backbone';
 import { Core } from './core/core';

@@ -3,21 +3,19 @@
 		[
 			"@babel/preset-env",
 			{
-				"useBuiltIns": "usage",
-				"corejs": "3"
+				"targets": {
+					"chrome": "58",
+					"ie": "11",
+					"firefox": "60"
+				},
+				"modules": "auto",
+				"useBuiltIns": "entry",
+				"corejs": 3
 			}
 		]
 	],
 	"plugins": [
-		"@babel/plugin-proposal-class-properties",
-		[
-			"@babel/plugin-transform-runtime",
-			{
-				"absoluteRuntime": false,
-				"corejs": "3",
-				"helpers": true,
-				"regenerator": true
-			}
-		]
-	]
+		"@babel/plugin-proposal-class-properties"
+	],
+	"exclude": "node_modules/**"
 }
