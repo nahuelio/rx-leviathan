@@ -5,36 +5,45 @@
 import _ from 'underscore';
 
 /**
- * Store Class
- * @class Store
+ * @template T
+ * @typedef {leviathan.Maybe<T>} Maybe
  */
-class Store {
+/**
+ * @typedef {leviathan.State<{}>} State
+ * @typedef {leviathan.Store<State>} Store
+ * @typedef {leviathan.StoreAction} StoreAction
+ */
+
+/**
+ * @class {Store}
+ */
+export const Store = class {
+
 	/**
-	 * State
-	 * @property state
+	 * @type {Maybe<State>}
 	 */
-	state;
+	state = null;
 
 	/**
 	 * @constructor
-	 * @param {Maybe<State<T>>} initial
+	 * @param {Maybe<State>} initial
 	 */
 	constructor(initial) {
-		Object.assign(this, { state: initial || {} });
+		Object.assign(this, { state: initial || null });
 	}
 
 	/**
-	 * Dispatch an action with given set of parameters.
-	 * @param {string} name
+	 * Dispatches an action with a given name and optionally passing parameters.
+	 * @this {Store}
+	 * @param {StoreAction} name
 	 * @param {any[]} params
-	 * @returns StoreInstance<T, A>
+	 * @returns {Store}
 	 */
 	dispatch(name, ...params) {
 		if (_.has(this, name) && _.isFunction(this[name])) {
+			// @ts-ignore
 			this[name](...params);
 		}
 		return this;
 	}
 }
-
-export { Store };
