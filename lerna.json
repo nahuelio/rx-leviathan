@@ -1,6 +1,9 @@
 {
   "version": "independent",
   "npmClient": "npm",
+  "publishConfig": {
+    "directory": "./dist"
+  },
   "packages": [
     "packages/*"
   ]

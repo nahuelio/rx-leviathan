@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		"module": "esnext",
+		"lib": ["dom", "es5", "es6", "es7"],
+		"moduleResolution": "node",
+		"sourceMap": true,
+		"inlineSourceMap": true,
+		"baseUrl": "./",
+		"noEmit": true
+	}
+}

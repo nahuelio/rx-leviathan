@@ -5,17 +5,20 @@
 declare namespace leviathan {
 	/** Helper Types **/
 
-	type Maybe<T> = T | null;
+	type Maybe<T> = T | null | undefined;
 
 	/** Types **/
 
 	type State<T> = { [P in keyof T]: any };
 	type Props<T> = { [P in keyof T]: any };
-	type StoreAction = keyof Omit<Store<State<{}>>, 'state' | 'dispatch'>;
+	type StoreAction = keyof Omit<Store<State<any>>, 'state' | 'dispatch'>;
+	type LeviathanElementCtor = StoreCtor | Extract<View<any, any>, 'new'>;
+	type LeviathanElements = Store<any> | View<any, any>;
+	type LeviathanFactoryElement = { name: string; instance: LeviathanElements };
 
 	/** Store Module **/
 
-	type StoreConstructor = { new (initial: Maybe<State<{}>>): Store<State<{}>>; };
+	type StoreCtor = { new (initial: Maybe<State<{}>>); };
 	interface Store<S extends State<{}>> {
 		readonly state: S;
 		dispatch(name: StoreAction, ...params: any[]): Store<S>;
@@ -23,27 +26,33 @@ declare namespace leviathan {
 
 	/** DOM Module **/
 
-	interface DOMView<P extends Props<{}>, S extends Store<State<{}>>> {
+	type ViewCtor = { new (props: Maybe<Props<{}>>, store: Maybe<State<{}>>); }
+	interface View<P extends Props<{}>, S extends Store<State<{}>>> {
 		readonly props: P;
 		readonly store: S;
-		render(): JSX.LeviathanElement;
+		readonly _patch: (parent: HTMLElement) => void;
+		render(): Maybe<JSX.LeviathanElement>;
 	}
 
 	interface DOM {
-		create: (name: JSX.LeviathanElementSignature, props?: Maybe<Props<{}>>, children?: DOM) => Maybe<DOMView<Props<{}>, Store<State<{}>>>>;
+		create: (name: JSX.LeviathanElementSignature, props: Maybe<any>, children: Maybe<View<any, any>>) => Maybe<View<any, any>>;
+		render(dom: HTMLElement, element: JSX.LeviathanElementSignature): string;
 	}
 
 	/** Core Module **/
 
 	interface Core {
-		get<R extends Maybe<any>>(path: string): R;
+		readonly _factory: LeviathanFactoryElement[];
+		register(ctor: LeviathanElementCtor): LeviathanElementCtor;
+		get(name?: string): Maybe<LeviathanElements>;
 	}
 
 	interface Leviathan {
 		readonly NAME: string;
 		readonly VERSION: string;
 		Core: Core;
-		Store: StoreConstructor;
+		Store: StoreCtor;
+		View: ViewCtor;
 		DOM: DOM;
 	}
 }

@@ -3,12 +3,12 @@
  * @author Patricio Ferreira <3dimentionar@gmail.com>
  *
  * @description
- * Leviathan is an experimental expansion that augments Backbone's capabilities.
+ * 	Leviathan is an experimental expansion that augments Backbone's capabilities.
  */
 import Backbone from 'backbone';
 import { Core } from './core/core';
 import { Store } from './store/store';
-import { DOM } from './dom/dom';
+import { DOM, View } from './dom/dom';
 
 /**
  * @type {leviathan.Leviathan}
@@ -18,6 +18,7 @@ export const Leviathan = {
 	VERSION: process.env.npm_package_version,
 	Core,
 	Store,
+	View,
 	DOM
 };
 

@@ -1,0 +1,6 @@
+{
+	"imports": {
+		"simple": "js/simple.js",
+		"advanced": "js/advanced.js"
+	}
+}

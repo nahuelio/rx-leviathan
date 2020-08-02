@@ -5,9 +5,9 @@ const options = {
 	root: './',
 	open: false,
 	wait: 3000,
-	logLevel: 0,
-	watch: ['./public', './lib', './node_modules/backbone-leviathan/dist/'],
-	mount: [['./public', './lib', './node_modules/backbone-leviathan/dist']]
+	logLevel: 2,
+	watch: ['./lib', './node_modules/backbone-leviathan/dist/'],
+	mount: [['/', './lib/html'], ['/js', './dist'], ['/libraries', './node_modules/@nahuelio']]
 };
 
 liveServer.start(options);

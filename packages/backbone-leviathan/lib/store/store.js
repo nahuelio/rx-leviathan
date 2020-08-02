@@ -8,6 +8,7 @@ import _ from 'underscore';
  * @template T
  * @typedef {leviathan.Maybe<T>} Maybe
  */
+
 /**
  * @typedef {leviathan.State<{}>} State
  * @typedef {leviathan.Store<State>} Store
@@ -15,11 +16,11 @@ import _ from 'underscore';
  */
 
 /**
- * @class {Store}
+ * @class {leviathan.StoreCtor}
  */
 export const Store = class {
-
 	/**
+	 * @readonly
 	 * @type {Maybe<State>}
 	 */
 	state = null;
@@ -40,7 +41,7 @@ export const Store = class {
 	 * @returns {Store}
 	 */
 	dispatch(name, ...params) {
-		if (_.has(this, name) && _.isFunction(this[name])) {
+		if (this[name] && _.isFunction(this[name])) {
 			// @ts-ignore
 			this[name](...params);
 		}
