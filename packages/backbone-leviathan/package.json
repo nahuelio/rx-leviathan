@@ -11,7 +11,9 @@
   "author": "Patricio Ferreira <3dimentionar@gmail.com>",
   "homepage": "https://github.com/nahuelio/backbone-leviathan/tree/master/packages/backbone-leviathan#readme",
   "license": "UNLICENSED",
-  "main": "lib/backbone-leviathan.js",
+  "main": "./lib/backbone-leviathan.js",
+  "types": "./lib/backbone-leviathan.d.ts",
+  "browser": "./dist/backbone-leviathan.min.js",
   "directories": {
     "lib": "lib",
     "test": "test"

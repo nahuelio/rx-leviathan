@@ -5,18 +5,13 @@
 import _ from 'underscore';
 
 /**
- * @template T
- * @typedef {leviathan.Maybe<T>} Maybe
+ * @class {Leviathan.Core}
  */
-
-/**
- * @interface {leviathan.Core}
- */
-export const Core = {
+export class Core {
 	/**
-	 * @type {leviathan.LeviathanFactoryElement[]}
+	 * @type {Leviathan.LeviathanFactoryElement[]}
 	 */
-	_factory: [],
+	static _factory = [];
 
 	/**
 	 * Decorator used to register artifact with instance name.
@@ -34,20 +29,20 @@ export const Core = {
 	 * 	    @Leviathan.register()
 	 * 	    class MyStore extends Leviathan.Store { ... }
 	 * 	</pre>
-	 * @param {leviathan.LeviathanElementCtor} ctor
-	 * @returns {leviathan.LeviathanElementCtor}
+	 * @param {Leviathan.LeviathanElementCtor} ctor
+	 * @returns {Leviathan.LeviathanElementCtor}
 	 */
-	register(ctor) {
+	static register(ctor) {
 		// TODO
 		return ctor;
-	},
+	}
 
 	/**
 	 * Retrieve registered artifact by a given name
 	 * @param {string} [name]
-	 * @returns {Maybe<leviathan.LeviathanElements>}
+	 * @returns {Maybe<Leviathan.LeviathanElements>}
 	 */
-	get: (name) => {
+	static get(name) {
 		const found = !_.isNull(name) ? Core._factory.find(
 			(factoryElement) => {
 			return factoryElement.name === name;

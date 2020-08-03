@@ -1,12 +1,22 @@
 {
 	"compilerOptions": {
 		"target": "es5",
-		"module": "esnext",
+		"module": "commonjs",
 		"lib": ["dom", "es5", "es6", "es7"],
 		"moduleResolution": "node",
-		"sourceMap": true,
+		"jsx": "react",
+		"jsxFactory": "Leviathan.DOM.create",
 		"inlineSourceMap": true,
 		"baseUrl": "./",
-		"noEmit": true
-	}
+		"noEmit": true,
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"experimentalDecorators": true
+	},
+	"include": [
+		"./lib/js"
+	],
+	"exclude": [
+		"node_modules"
+	]
 }

@@ -29,6 +29,7 @@
     "url": "git+https://github.com/nahuelio/backbone-leviathan.git"
   },
   "scripts": {
+    "build": "rollup -c -w",
     "start": "node live-server.js"
   },
   "bugs": {

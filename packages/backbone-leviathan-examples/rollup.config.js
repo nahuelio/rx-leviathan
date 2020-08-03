@@ -12,8 +12,8 @@ const output = {
 
 export default {
 	input: {
-		'simple': './lib/js/simple.js',
-		'advanced': './lib/js/advanced.js'
+		'simple': './lib/js/simple.tsx',
+		'advanced': './lib/js/advanced.tsx'
 	},
 	plugins: [
 		nodeResolve(),

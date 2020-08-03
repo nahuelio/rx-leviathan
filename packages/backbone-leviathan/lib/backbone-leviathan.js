@@ -10,16 +10,17 @@ import { Core } from './core/core';
 import { Store } from './store/store';
 import { DOM, View } from './dom/dom';
 
-/**
- * @type {leviathan.Leviathan}
- */
-export const Leviathan = {
-	NAME: process.env.npm_package_name,
-	VERSION: process.env.npm_package_version,
-	Core,
-	Store,
-	View,
-	DOM
-};
+export default Object.assign(Backbone, {
+	Leviathan: {
+		NAME: process.env.npm_package_name,
+		VERSION: process.env.npm_package_version,
+		Core,
+		Store,
+		View,
+		DOM
+	}
+});
 
-export default Object.assign(Backbone, { Leviathan });
+export const NAME = Backbone.Leviathan.NAME;
+export const VERSION = Backbone.Leviathan.VERSION;
+export { Core, Store, View, DOM };
