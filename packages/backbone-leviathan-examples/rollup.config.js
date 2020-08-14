@@ -1,27 +1,13 @@
-const commonjs = require('@rollup/plugin-commonjs');
-const { nodeResolve } = require('@rollup/plugin-node-resolve');
-const { typescript } = require('@rollup/plugin-typescript');
+/**
+ * Rollup Bundling Configuration
+ * @author Patricio Ferreira <3dimentionar@gmail.com>
+ */
+const target = process.env.BUNDLE_TARGET || 'client';
+const config = require(`./config/${target}.js`);
 
-const output = {
-	dir: './dist',
-	entryFileNames: '[name].js',
-	format: 'systemjs',
-	exports: 'named',
-	sourcemap: false
-};
-
-export default {
-	input: {
-		'simple': './lib/js/simple.tsx',
-		'advanced': './lib/js/advanced.tsx'
-	},
-	plugins: [
-		nodeResolve(),
-		commonjs(),
-		typescript()
-	],
-	output: [
-		{ ...output, name: 'simple' },
-		{ ...output, name: 'advanced' }
-	]
+module.exports = {
+	input: { ...config.input },
+	plugins: config.plugins,
+	output: [config.output],
+	external: [...config.external]
 };

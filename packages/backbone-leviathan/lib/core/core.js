@@ -1,11 +1,12 @@
 /**
- * BackboneLeviathan Core
+ * @module @nahuelio/backbone-leviathan/core
+ * @desc Backbone Leviathan Core TODO
  * @author Patricio Ferreira <3dimentionar@gmail.com>
  */
 import _ from 'underscore';
 
 /**
- * @class {Leviathan.Core}
+ * @class {backbone-leviathan.Core}
  */
 export class Core {
 	/**
@@ -33,6 +34,16 @@ export class Core {
 	 * @returns {Leviathan.LeviathanElementCtor}
 	 */
 	static register(ctor) {
+		// TODO
+		return ctor;
+	}
+
+	static Subscribes(ctor) {
+		// TODO
+		return ctor;
+	}
+
+	static Observable(ctor) {
 		// TODO
 		return ctor;
 	}

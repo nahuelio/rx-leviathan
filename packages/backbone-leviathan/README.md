@@ -1,6 +1,7 @@
 # Backbone Leviathan
 
 ##### `@nahuelio/backbone-leviathan`
+![Documentation Coverage](docs/badge.svg "Documentation Coverage")
 
 > TODO: description
 

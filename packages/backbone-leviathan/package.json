@@ -34,7 +34,8 @@
     "build": "cross-env ENV=prod rollup -c && bundlewatch",
     "test": "cross-env ENV=test mocha --config .mocharc.js --watch",
     "coverage": "cross-env ENV=test nyc mocha --config ./.mocharc.js",
-    "release": "npm run build && babel-node release.js"
+    "release": "npm run build && babel-node release.js",
+    "docs": "documentation serve --watch lib/backbone-leviathan.js"
   },
   "bugs": {
     "url": "https://github.com/nahuelio/backbone-leviathan/issues"
@@ -79,11 +80,15 @@
     "@rollup/plugin-babel": "5.1.0",
     "@rollup/plugin-commonjs": "14.0.0",
     "@rollup/plugin-node-resolve": "8.4.0",
+    "@types/backbone": "1.4.4",
     "backbone": "1.4.0",
     "bundlewatch": "0.2.7",
     "chai": "4.2.0",
     "core-js": "3.6.5",
     "cross-env": "7.0.2",
+    "documentation": "13.0.2",
+    "eslint": "7.6.0",
+    "eslint-plugin-jsdoc": "30.2.1",
     "jsdom": "16.3.0",
     "jsdom-global": "3.0.2",
     "mocha": "8.1.0",

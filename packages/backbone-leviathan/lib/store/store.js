@@ -1,22 +1,23 @@
 /**
- * Backbone Leviathan Store
+ * @module @nahuelio/backbone-leviathan/store
+ * @desc Backbone Leviathan Store TODO
  * @author Patricio Ferreira <3dimentionar@gmail.com>
  */
 import _ from 'underscore';
 
 /**
- * @class {Leviathan.Store}
+ * Class Leviathan.Store
  */
 export class Store {
 	/**
 	 * @readonly
-	 * @type {Maybe<Leviathan.State<{}>>}
+	 * @type {Leviathan.Maybe<Leviathan.Props<{}>>}
 	 */
 	state = null;
 
 	/**
 	 * @constructor
-	 * @param {Maybe<Leviathan.State<{}>>} initial
+	 * @param {Leviathan.Maybe<Leviathan.Props<{}>>} initial
 	 */
 	constructor(initial) {
 		Object.assign(this, { state: initial || null });

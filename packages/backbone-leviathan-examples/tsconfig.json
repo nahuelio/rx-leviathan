@@ -1,22 +1,25 @@
 {
 	"compilerOptions": {
 		"target": "es5",
-		"module": "commonjs",
 		"lib": ["dom", "es5", "es6", "es7"],
 		"moduleResolution": "node",
 		"jsx": "react",
 		"jsxFactory": "Leviathan.DOM.create",
 		"inlineSourceMap": true,
 		"baseUrl": "./",
-		"noEmit": true,
+		"noEmit": false,
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
+		"isolatedModules": true,
 		"experimentalDecorators": true
 	},
 	"include": [
-		"./lib/js"
+		"./js/*.tsx",
+		"./server/**/*.ts"
 	],
 	"exclude": [
-		"node_modules"
+		"node_modules",
+		"dist",
+		"config"
 	]
 }
