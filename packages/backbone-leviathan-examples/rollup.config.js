@@ -3,11 +3,11 @@
  * @author Patricio Ferreira <3dimentionar@gmail.com>
  */
 const target = process.env.BUNDLE_TARGET || 'client';
-const config = require(`./config/${target}.js`);
+const configs = require(`./config/${target}.js`);
 
-module.exports = {
-	input: { ...config.input },
-	plugins: config.plugins,
-	output: [config.output],
-	external: [...config.external]
-};
+module.exports = configs.map((config) => ({
+	input: config.input,
+	output: config.output,
+	...(config.external ? { external: config.external } : {}),
+	...(config.plugins ? { plugins: config.plugins } : {})
+}));

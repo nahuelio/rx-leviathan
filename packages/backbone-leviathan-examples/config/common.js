@@ -9,10 +9,7 @@ module.exports = {
 		dir: './dist',
 		entryFileNames: '[name].js',
 		exports: 'named',
-		sourcemap: true,
-		paths: {
-			'jquery': 'js/utils/jq-null.js'
-		}
+		sourcemap: 'inline'
 	},
 	plugins: [
 		nodeResolve(),

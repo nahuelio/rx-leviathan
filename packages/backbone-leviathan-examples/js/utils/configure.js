@@ -11,5 +11,5 @@ import { DOM } from '@nahuelio/backbone-leviathan';
  * @returns {object}
  */
 export const configureRoute = (params, PageView) => {
-	return { ...params, app: DOM.server(PageView) };
+	return { ...params, handler: () => DOM.server(PageView) };
 };

@@ -5,20 +5,30 @@ import { readdirSync } from 'fs';
 import { Router } from 'express';
 
 /**
+ * Page Router
+ */
+type PageRoute = {
+	[name: string]: any;
+	router: string
+	handler: () => string;
+};
+
+/**
  * Handle Page Rendering
  */
 const handlePage = async (params, req, res) => {
-	res.status(200).render('main', params);
+	const { handler, ...remainingParams } = params;
+	res.status(200).render('main', { ...remainingParams, app: handler() });
 };
 
 /**
  * Load Page
  */
-const loadPage = async (router, file) => {
-	const normalizedFile = `${file.substring(0, file.indexOf('.'))}.js`;
-	const page = await import(`../../dist/${normalizedFile}`);
-	console.log(page);
-	return page;
+const loadPage = async (router, memo, file): Promise<PageRoute> => {
+	if (file.indexOf('libraries') === -1) {
+		memo.push(import(`${process.cwd()}/dist/public/${file}`));
+	}
+	return memo;
 }
 
 /**
@@ -26,9 +36,8 @@ const loadPage = async (router, file) => {
  */
 export const configureRoutes = async () => {
 	const router = Router();
-	const files = readdirSync('js/pages', { encoding: 'utf-8' });
-	await files.forEach(loadPage.bind(this, router));
-	// const { route, ...params } = info;
-	// router.get(route, handlePage.bind(this, params));
+	const files = readdirSync('dist/public', { encoding: 'utf-8' });
+	const pages: PageRoute[] = await files.reduce(loadPage.bind(this, router), []);
+	pages.forEach((page) => router.get(page.route, handlePage.bind(this, page)));
 	return router;
 };

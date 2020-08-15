@@ -10,11 +10,10 @@
 		"noEmit": false,
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
-		"isolatedModules": true,
 		"experimentalDecorators": true
 	},
 	"include": [
-		"./js/*.tsx",
+		"./js/**/*",
 		"./server/**/*.ts"
 	],
 	"exclude": [

@@ -2,9 +2,8 @@
 	"watch": [
 		"server/**/*",
 		"js/**/*",
-		"dist",
-		"tsconfig.json"
-	],
-	"exec": "node dist/server.js",
-	"nodeArgs": []
+		"config/**/*",
+		"tsconfig.json",
+		"rollup.config.js"
+	]
 }

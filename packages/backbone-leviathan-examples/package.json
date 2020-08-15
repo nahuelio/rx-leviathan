@@ -31,7 +31,8 @@
   "scripts": {
     "build-client": "cross-env BUNDLE_TARGET=client rollup -c",
     "build-server": "cross-env BUNDLE_TARGET=server rollup -c",
-    "start": "npm run build-server && npm run build-client && nodemon"
+    "serve": "node ./dist/server.js",
+    "start": "nodemon --exec \"npm run build-server && npm run build-client && npm run serve\""
   },
   "bugs": {
     "url": "https://github.com/nahuelio/backbone-leviathan/issues"
@@ -56,6 +57,7 @@
     "eslint": "7.6.0",
     "nodemon": "2.0.4",
     "rollup": "2.23.0",
+    "rollup-plugin-terser": "7.0.0",
     "typescript": "3.9.7"
   }
 }

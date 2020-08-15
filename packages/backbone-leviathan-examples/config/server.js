@@ -4,11 +4,11 @@
 const typescript = require('@rollup/plugin-typescript');
 const common = require('./common');
 
-module.exports = {
+module.exports = [{
 	input: {
 		'server': './server/server.ts'
 	},
-	plugins: [...common.plugins, typescript({ module: 'commonjs' })],
+	plugins: [...common.plugins, typescript({ module: 'esnext' })],
 	output: {
 		...common.output,
 		format: 'cjs'
@@ -19,5 +19,5 @@ module.exports = {
 		'express',
 		'compression'
 	]
-};
+}];
 
