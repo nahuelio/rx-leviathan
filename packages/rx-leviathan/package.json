@@ -19,7 +19,6 @@
     "test": "test"
   },
   "files": [
-    "@types",
     "dist",
     "LICENSE",
     "CHANGELOG.md",

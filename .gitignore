@@ -49,7 +49,7 @@ node_modules/
 .cache/
 
 # Codebase
-./release
+dist
 
 # OSs
 .DS_Store
