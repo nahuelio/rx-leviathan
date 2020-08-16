@@ -1,3 +1,3 @@
-# Backbone Leviathan
+# Rx Leviathan
 
-Experimental rework on backbone js library using other libraries to expand functionality.
+Experimental library for building reactive applications

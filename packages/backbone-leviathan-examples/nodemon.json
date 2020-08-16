@@ -1,9 +1,0 @@
-{
-	"watch": [
-		"server/**/*",
-		"js/**/*",
-		"config/**/*",
-		"tsconfig.json",
-		"rollup.config.js"
-	]
-}

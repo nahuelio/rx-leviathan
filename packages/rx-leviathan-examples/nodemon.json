@@ -1,0 +1,9 @@
+{
+	"ext": "json,ts,tsx,js,mjs,ejs",
+	"watch": [
+		"node_modules/@nahuelio/rx-leviathan/dist",
+		"server",
+		"js"
+	],
+	"ignoreRoot": [".git"]
+}
