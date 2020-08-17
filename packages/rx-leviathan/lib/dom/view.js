@@ -8,42 +8,76 @@
  * @class {RxLeviathan.View<RxLeviathan.Props, RxLeviathan.Store>}
  */
 export class View {
+	/**
+	 * @private
+	 * @type {object}
+	 */
 	_props = {};
-	_store = null;
-	_events = {};
 
 	/**
-	 * @type {RxLeviathan.Props}
+	 * @private
+	 * @type {RxLeviathan.Maybe<RxLeviathan.Store>}
+	 */
+	_store = null;
+
+	/**
+	 * @private
+	 * @type {RxLeviathan.SubscriptionHash}
+	 */
+	_subscriptions = {};
+
+	/**
+	 * Unique reference
+	 * @private
+	 * @type {RxLeviathan.Maybe<Symbol>}
+	 */
+	uid = null;
+
+	/**
+	 * Get Props
+	 * @returns {RxLeviathan.Props}
 	 */
 	get props() {
 		return this._props;
 	}
 
 	/**
-	 * @type {RxLeviathan.Store}
+	 * Get Store
+	 * @returns {RxLeviathan.Store}
 	 */
 	get store() {
 		return this._store;
 	}
 
 	/**
-	 * @type {RxLeviathan.EventHash}
+	 * Get Subscriptions
+	 * @type {RxLeviathan.SubscriptionHash}
 	 */
-	get events() {
-		return this._events;
+	get subscriptions() {
+		return this._subscriptions;
 	}
 
 	/**
 	 * @constructor
-	 * @param {RxLeviathan.Maybe<RxLeviathan.Props>} props
+	 * @param {RxLeviathan.Maybe<RxLeviathan.Props>} [props]
 	 */
 	constructor(props) {
-		Object.assign(this, { props: props || {} });
+		Object.assign(this, { props: props || {}, uid: Symbol.for('View') });
 	}
 
 	/**
-	 * Default strategy to render a view
-	 * @returns {Maybe<JSX.RxLeviathanElement>}
+	 * Default patching strategy
+	 * @private
+	 * @param {HTMLElement} parent
+	 * @returns {void}
+	 */
+	_patch(parent) {
+		// TODO
+	}
+
+	/**
+	 * Default strategy that renders the view
+	 * @returns {RxLeviathan.Maybe<JSX.RxLeviathanElement>}
 	 */
 	render() {
 		return null;

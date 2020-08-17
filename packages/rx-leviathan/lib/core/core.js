@@ -1,39 +1,22 @@
 /**
  * @module @nahuelio/rx-leviathan/core
- * @desc RxLeviathan Core TODO
+ * @desc RxLeviathan Core
  * @author Patricio Ferreira <3dimentionar@gmail.com>
  */
-import _ from 'underscore';
 
 /**
- * @type {RxLeviathan.RxLeviathanFactoryElement[]}
+ * Retrieve registered artifact by his unique symbol
+ * @param {RxLeviathan.Maybe<Symbol>} [symbol]
+ * @returns {RxLeviathan.Maybe<RxLeviathan.RxLeviathanElements>}
  */
-const factory = [];
-
-/**
- * Factory Register
- * @param
- */
-const register = (instance) => {
-	// TODO
-	return instance;
+export const get = (symbol) => {
+	if (!symbol) return null;
+	const key = Symbol.keyFor(symbol);
+	return key ? Symbol.for(key): null;
 };
 
 /**
- * Retrieve registered artifact by a given name
- * @param {string} [name]
- * @returns {Maybe<RxLeviathan.RxLeviathanElements>}
- */
-export const get = (name) => {
-	const found = !_.isNull(name) ? Core._factory.find(
-		(factoryElement) => {
-			return factoryElement.name === name;
-		}) : null;
-	return found ? found.instance : null;
-};
-
-/**
- * Subscribe decorator
+ * Subscribe Class Decorator
  * @param {...RxLeviathan.Store} stores
  * @returns {Function}
  */
@@ -44,7 +27,7 @@ export const Subscribes = (...stores) => {
 };
 
 /**
- * Observable decorator
+ * Observable Class Decorator
  * @param {Function} ctor
  * @returns {Function}
  */
@@ -52,3 +35,12 @@ export const Observable = (ctor) => {
 	// TODO
 	return ctor;
 };
+
+/**
+ * Action Method Decorator
+ * @param {Function} method
+ * @returns {any}
+ */
+export const Action = (method) => {
+	return method;
+}

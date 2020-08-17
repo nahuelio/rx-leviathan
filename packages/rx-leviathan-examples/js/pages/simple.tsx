@@ -1,14 +1,12 @@
 /**
  * Page Simple
  */
-import RxLeviathan, { Subscribes, View } from '@nahuelio/rx-leviathan';
+import RxLeviathan, { View } from '@nahuelio/rx-leviathan';
 import { configureRoute } from '../utils/configure';
-import { ExampleStore } from '../store/example';
 import { ComponentA } from '../components/component-a';
 import { ComponentB } from '../components/component-b';
 
-@Subscribes(ExampleStore)
-export class SimplePage extends View<unknown, ExampleStore> {
+export class SimplePage extends View {
 	render() {
 		return (
 			<div className={`simple-view`}>

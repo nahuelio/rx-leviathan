@@ -10,17 +10,32 @@ import _ from 'underscore';
  */
 export class Store {
 	/**
-	 * @readonly
+	 * Unique reference
+	 * @private
+	 * @type {Maybe<Symbol>}
+	 */
+	uid = null;
+
+	/**
+	 * @private
 	 * @type {RxLeviathan.Maybe<RxLeviathan.Props<{}>>}
 	 */
-	state = null;
+	_state = null;
+
+	/**
+	 * Get State
+	 * @returns {RxLeviathan.Maybe<RxLeviathan.Props<{}>>}
+	 */
+	get state() {
+		return this._state;
+	}
 
 	/**
 	 * @constructor
 	 * @param {RxLeviathan.Maybe<RxLeviathan.Props<{}>>} initial
 	 */
 	constructor(initial) {
-		Object.assign(this, { state: initial || null });
+		Object.assign(this, { state: initial || null, uid: Symbol.for('Store') });
 	}
 
 	/**

@@ -7,5 +7,5 @@ export const NAME = process.env.npm_package_name;
 export const VERSION = process.env.npm_package_name;
 export { Store } from './store/store';
 export { View } from './dom/view';
-export { Observable, Subscribes, get } from './core/core';
-export { render } from './dom/dom';
+export { Observable, Subscribes, Action, get } from './core/core';
+export { create, render } from './dom/dom';

@@ -9,7 +9,7 @@ export class ComponentA extends View<ComponentAProps, ExampleStore> {
 		counter: this.onCounterChange
 	}
 
-	onCounterChange(subscriber) {
+	onCounterChange(subscriber: View) {
 		console.log(subscriber);
 	}
 

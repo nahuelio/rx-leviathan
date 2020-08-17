@@ -13,43 +13,47 @@ declare namespace RxLeviathan {
 
 	/** Types **/
 
-	type Props<T> = { [K in keyof Partial<T>]: any; };
+	type Props<T = {}> = { [K in keyof Partial<T>]: any; };
 	type StoreAction<S> = keyof Omit<S, 'state' | 'dispatch'>;
-	type RxLeviathanElements = Store<any> | View<any, any>;
-	type RxLeviathanFactoryElement = { name: string; instance: RxLeviathanElements };
-	type EventHash<P, V = View<any, any>> = {
-		[K in keyof P]: (subscriber: V) => any
+	type RxLeviathanElements = Store<{}> | View;
+	type SubscriptionHash<P> = {
+		[K in keyof P]: <V extends View>(subscriber: V) => any
 	};
 
 	/** Store Module **/
 
-	interface Store<S = Props<any>> {}
-	class Store<S> {
-		readonly state: S;
-		dispatch(action: StoreAction<this>, ...params: any[]): Store<S>;
-		constructor(initial: Maybe<S>);
+	interface Store<Props> {}
+	class Store<Props> {
+		readonly state: Props;
+		dispatch(action: StoreAction<this>, ...params: any[]): Store<Props>;
+		constructor(initial: Maybe<Props>);
 	}
 
 	/** View Module **/
 
-	interface View<P extends Props<any>, S extends Store<any>> {}
-	class View<P, S> {
-		readonly props: P;
-		readonly store: Pick<S, 'state' | 'dispatch'>;
-		readonly subscriptions: EventHash<Partial<P>, View<P, S>>;
-		private readonly _patch: (parent: HTMLElement) => void;
+	interface View<Props = {}, Store = {}> {}
+	class View<Props, Store> {
+		readonly props: Props;
+		readonly store: Omit<Store, 'state'>;
+		readonly subscriptions: SubscriptionHash<Partial<Props>>;
 		render(): Maybe<JSX.RxLeviathanElement>;
-		constructor(props: Maybe<P>);
+		constructor(props?: Maybe<Props>);
 	}
 
 	/** Top-Level Module **/
 
 	const NAME: string;
 	const VERSION: string;
-	function Subscribes<F extends Function, S = Store>(...stores: S[]): F; // @Decorator/Function
-	function Observable<F extends Function>(ctor: F); // @Decorator/Function
-	function render(element: JSX.RxLeviathanElement, dom?: HTMLElement): string;
-	function get(name?: string): Maybe<RxLeviathanFactoryElement>;
+
+	/** Decorators **/
+	function Subscribes<F extends Function, S = Store<any>>(...stores: S[]): F; // Class Decorator / Function
+	function Observable<F extends Function>(ctor: F): F; // Class Decorator / Function
+	function Action<M extends Function>(method: M): any; // Method Decorator / Function
+
+	/** Core Functions **/
+	function create(element: JSX.RxLeviathanElement, props: Props, children?: JSX.RxLeviathanElement): RxLeviathan.View;
+	function render(element: JSX.RxLeviathanElement, dom?: HTMLElement): string | JSX.IntrinsicElements | void;
+	function get(symbol?: Symbol): Maybe<RxLeviathanElements>;
 }
 
 /**
@@ -58,7 +62,7 @@ declare namespace RxLeviathan {
  */
 declare global {
 	namespace JSX {
-		type RxLeviathanElement = IntrinsicElements | RxLeviathan.View<any, any>;
+		type RxLeviathanElement = IntrinsicElements | RxLeviathan.View;
 
 		/**
 		 * Non-synthetic intrinsic elements (Using dom.lib)

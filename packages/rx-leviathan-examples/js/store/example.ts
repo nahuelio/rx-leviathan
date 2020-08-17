@@ -2,7 +2,7 @@ import { Observable, Store } from '@nahuelio/rx-leviathan';
 
 export type ExampleStoreProps = {
 	counter?: number;
-}
+};
 
 /**
  * Example Store
