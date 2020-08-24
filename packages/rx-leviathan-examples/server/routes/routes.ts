@@ -29,7 +29,7 @@ const handlePage = async (params, req, res) => {
 const createLoad = (memo, file): Promise<PageRoute>[] => {
 	if (file.indexOf('libraries') === -1) {
 		const absoluteFile = System.resolve(`${process.cwd()}/dist/${file}`);
-		memo.push(System.import(`file:///${absoluteFile}`));
+		memo.push(System.import(`${absoluteFile}`));
 	}
 	return memo;
 }

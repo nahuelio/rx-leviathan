@@ -66,16 +66,6 @@ export class View {
 	}
 
 	/**
-	 * Default patching strategy
-	 * @private
-	 * @param {HTMLElement} parent
-	 * @returns {void}
-	 */
-	_patch(parent) {
-		// TODO
-	}
-
-	/**
 	 * Default strategy that renders the view
 	 * @returns {RxLeviathan.Maybe<JSX.RxLeviathanElement>}
 	 */

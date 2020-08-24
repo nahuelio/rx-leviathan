@@ -31,7 +31,7 @@
   "scripts": {
     "build": "rollup -c --silent",
     "serve": "ts-node server/server.ts",
-    "start": "nodemon --exec \"npm run build && npm run serve"
+    "start": "nodemon --exec \"npm run build && npm run serve\""
   },
   "bugs": {
     "url": "https://github.com/nahuelio/rx-leviathan/issues"

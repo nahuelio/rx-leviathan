@@ -3,7 +3,8 @@
  * @desc RxLeviathan DOM TODO
  * @author Patricio Ferreira <3dimentionar@gmail.com>
  */
-import { patch, elementOpen, elementClose, elementVoid, text } from 'incremental-dom/index';
+import * as DOMStr from './dom-string';
+import * as DOM from 'incremental-dom';
 
 /**
  * Returns true if the current platform is a browser, false otherwise.
@@ -33,43 +34,26 @@ const isDomInvalid = (dom) => {
 };
 
 /**
- * Render a given element as String (SSR)
- * @param {JSX.RxLeviathanElement} element
- * @returns {string}
- */
-const renderToString = (element) => {
-	return '';
-};
-
-/**
- * Bootstrap a given element from the dom
- * @param {JSX.RxLeviathanElement} element
- * @returns {void}
- */
-const bootstrap = (element) => {
-	// TODO
-};
-
-/**
  * Factory for instantiating JSX.LeviathanElement
- * @param {JSX.RxLeviathanElement} name
+ * @param {boolean} [browser = false]
+ * @param {JSX.RxLeviathanElement} nameOrElement
  * @param {Maybe<any>} props
- * @param {Maybe<View>} children
- * @returns {Maybe<View>}
+ * @param {Maybe<View>} [children]
+ * @returns {Maybe<View> | string}
  */
-export const create = (name, props, children) => {
-	// TODO: will call element._patch();
-	return null;
-};
+export const create = ((browser = false, nameOrElement, props, children) => {
+	// instantiate if name is function constructor,
+	return '';
+}).bind(null, isBrowser);
 
 /**
  * Client/Server DOM Rendering strategy
  * @param {HTMLElement} dom
  * @param {JSX.RxLeviathanElement} element
- * @returns {void}
+ * @returns {string | HTMLElement}
  */
 export const render = (element, dom ) => {
 	const invalid = isElementInvalid(element) && isDomInvalid(dom);
 	if (invalid) throw invalid;
-	!isBrowser ? patch(dom, renderToString.bind(this, element)) : bootstrap(element);
+	return isBrowser ? dom.appendChild(create(element)) : (dom.innerHTML = create(element));
 };

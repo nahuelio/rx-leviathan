@@ -1,6 +1,7 @@
 {
 	"watch": [
 		"./config/*.js",
+		"lib/**/*.js",
 		"rollup.config.js",
 		".babelrc.json"
 	]
