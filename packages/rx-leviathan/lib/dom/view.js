@@ -50,6 +50,14 @@ export class View {
 	}
 
 	/**
+	 * Set Subscriptions
+	 * @param {RxLeviathan.SubscriptionHash} value
+	 */
+	set subscriptions(value) {
+		this._subscriptions = value;
+	}
+
+	/**
 	 * Get Subscriptions
 	 * @type {RxLeviathan.SubscriptionHash}
 	 */
@@ -62,7 +70,7 @@ export class View {
 	 * @param {RxLeviathan.Maybe<RxLeviathan.Props>} [props]
 	 */
 	constructor(props) {
-		Object.assign(this, { props: props || {}, uid: Symbol.for('View') });
+		Object.assign(this, { _props: props || {}, uid: Symbol.for('View') });
 	}
 
 	/**

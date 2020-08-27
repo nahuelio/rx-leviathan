@@ -13,6 +13,9 @@ declare namespace RxLeviathan {
 
 	/** Types **/
 
+	type RxLeviathanKey = string | number | null;
+	type RxLeviathanAttributes<T> = { [P in keyof T]: any };
+
 	type Props<T = {}> = { [K in keyof Partial<T>]: any; };
 	type StoreAction<S> = keyof Omit<S, 'state' | 'dispatch'>;
 	type RxLeviathanElements = Store<{}> | View;
@@ -40,6 +43,16 @@ declare namespace RxLeviathan {
 		constructor(props?: Maybe<Props>);
 	}
 
+	/** DOM To String Module **/
+	interface DOM {
+		attr(attributes?: object, ...modifiers: Function[]): string | void;
+		text(content: any, ...modifiers: Function[]): void;
+		elementOpen(tagName: string, key?: RxLeviathanKey, statics?: RxLeviathanAttributes<any>, ...args): void;
+		elementVoid(tagName: string, key?: RxLeviathanKey, statics?: RxLeviathanAttributes<any>, ...args): void;
+		elementClose(tagName: string): void;
+		patch(target: HTMLElement | ReadableStream<any>, resolver: Function): string | void;
+	}
+
 	/** Top-Level Module **/
 
 	const NAME: string;
@@ -62,7 +75,7 @@ declare namespace RxLeviathan {
  */
 declare global {
 	namespace JSX {
-		type RxLeviathanElement = IntrinsicElements | RxLeviathan.View;
+		type RxLeviathanElement = keyof IntrinsicElements | RxLeviathan.View;
 
 		/**
 		 * Non-synthetic intrinsic elements (Using dom.lib)

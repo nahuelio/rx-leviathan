@@ -2,13 +2,23 @@
  * Incremental DOM to String
  * @author Patricio Ferreira <3dimentionar@gmail.com>
  */
-import { Writable } from 'stream';
 
 /**
  * Internal stream
  * @private
+ * @type {string[]}
  */
-let stream = new Writable({ defaultEncoding: 'utf8' });
+let buffer = [];
+
+/**
+ * Buffer Flush
+ * @returns {string}
+ */
+const flush = () => {
+	const out = buffer.join('');
+	buffer = [];
+	return out;
+}
 
 /**
  * Applies a list of filter functions to a given value and return the result
@@ -27,7 +37,7 @@ const applyModifiers = (value, ...modifiers) => {
  * @param {Function[]} modifiers
  * @returns {string}
  */
-export const sAttrs = (attributes = {}, ...modifiers) => {
+export const attr = (attributes = {}, ...modifiers) => {
 	return Object.keys(attributes).map((key) => `${key}=${applyModifiers(attributes[key], ...modifiers)}`).join(' ');
 };
 
@@ -39,7 +49,7 @@ export const sAttrs = (attributes = {}, ...modifiers) => {
  * @returns {void}
  */
 export const elementOpen = (tagName, attributes = {}, selfClose = false) => {
-	stream.cork().write(`<${tagName} ${sAttrs(attributes)}${selfClose ? ' />' : '>'}`).uncork();
+	buffer.push(`<${tagName} ${attr(attributes)}${selfClose ? ' />' : '>'}`);
 };
 
 /**
@@ -49,7 +59,7 @@ export const elementOpen = (tagName, attributes = {}, selfClose = false) => {
  * @returns {void}
  */
 export const elementVoid = (tagName, attributes) => {
-	stream.cork().write(`${elementOpen(tagName, attributes, true)}`).uncork();
+	buffer.push(`${elementOpen(tagName, attributes, true)}`);
 };
 
 /**
@@ -59,7 +69,7 @@ export const elementVoid = (tagName, attributes) => {
  * @returns {void}
  */
 export const text = (content, ...modifiers) => {
-	stream.cork().write(applyModifiers(content, ...modifiers)).uncork();
+	buffer.push(applyModifiers(content, ...modifiers));
 }
 
 /**
@@ -68,20 +78,18 @@ export const text = (content, ...modifiers) => {
  * @returns {void}
  */
 export const elementClose = (tagName) => {
-	stream.cork().write(`</${tagName}>`).uncork();
+	buffer.push(`</${tagName}>`);
 }
-
-
 
 /**
  * Patch Strategy for Element to string
- * @param {ReadableStream} out
+ * @param {string[]} target
  * @param {Function} resolver
- * @param {boolean} [flush = true]
- * @return {ReadableStream | null}
+ * @return {string | null}
  */
-export const patch = (out, resolver, flush = true) => {
-	if (!out || !resolver) return null;
+export const patch = (target, resolver) => {
+	if (!resolver) return null;
+	if (target && target instanceof Array) buffer = target;
 	resolver();
-	return stream.pipe(out, { end: flush });
+	return flush();
 };

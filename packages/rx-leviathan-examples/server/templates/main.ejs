@@ -9,9 +9,9 @@
     <body>
         <div id="app"><%- app %></div>
         <script type="text/javascript">
-            System.import('./libraries.js').then(({ render }) => {
+            System.import('./libraries.js').then((RxLeviathan) => {
 				System.import(('/<%- pageName %>.js'.toLowerCase())).then((module) => {
-                    render(module['<%- pageName %>Page'], document.getElementById('app'));
+					RxLeviathan.default.render(module['<%- pageName %>Page'], document.getElementById('app'));
 				});
 			});
         </script>
