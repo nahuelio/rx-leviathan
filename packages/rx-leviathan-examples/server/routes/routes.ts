@@ -2,6 +2,7 @@
  * Application Routes
  */
 import 'systemjs';
+import { resolve } from 'path';
 import { readdirSync } from 'fs';
 import { Router } from 'express';
 
@@ -28,7 +29,7 @@ const handlePage = async (params, req, res) => {
  */
 const createLoad = (memo, file): Promise<PageRoute>[] => {
 	if (file.indexOf('libraries') === -1) {
-		const absoluteFile = System.resolve(`${process.cwd()}/dist/${file}`);
+		const absoluteFile = System.resolve(`./dist/${file}`);
 		memo.push(System.import(`${absoluteFile}`));
 	}
 	return memo;

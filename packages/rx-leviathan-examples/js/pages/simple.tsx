@@ -9,7 +9,7 @@ import { ComponentB } from '../components/component-b';
 export class SimplePage extends View {
 	render() {
 		return (
-			<div className={`simple-view`}>
+			<div className={`flex flex-column pa3 w-100 simple-view`}>
 				<ComponentA className={`component-a`} counter={1} />
 				<ComponentB className={`component-b`} />
 			</div>

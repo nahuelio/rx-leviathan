@@ -14,8 +14,7 @@ const output = {
 	dir: './dist',
 	entryFileNames: '[name].js',
 	exports: 'named',
-	format: 'system',
-	sourcemap: 'inline'
+	format: 'system'
 };
 
 /**
@@ -38,11 +37,10 @@ const targetApplication = {
 	plugins,
 	output: Object.assign({
 		paths: {
-			'rxjs': './libraries.js',
 			'@nahuelio/rx-leviathan': './libraries.js'
 		}
 	}, output),
-	external: ['rxjs', '@nahuelio/rx-leviathan']
+	external: ['@nahuelio/rx-leviathan']
 }
 
 module.exports = (environment === 'prod' ? [targetLibraries] : []).concat([targetApplication]);

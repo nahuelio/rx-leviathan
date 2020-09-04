@@ -15,9 +15,9 @@ export class ComponentA extends View<ComponentAProps, ExampleStore> {
 
 	render(): Maybe<JSX.RxLeviathanElement> {
 		return (
-			<div className={`${this.props.className}`}>
-				<span>Component A</span>
-				<hr />
+			<div className={`flex flex-column pa3 ba ${this.props.className}`}>
+				<h2 className={`ma0`}>Component A</h2>
+				<p>Description</p>
 			</div>
 		);
 	}
