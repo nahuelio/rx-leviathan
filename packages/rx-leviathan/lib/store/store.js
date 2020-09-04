@@ -3,7 +3,6 @@
  * @desc RxLeviathan Store TODO
  * @author Patricio Ferreira <3dimentionar@gmail.com>
  */
-import _ from 'underscore';
 
 /**
  * Class Leviathan.Store
@@ -45,7 +44,7 @@ export class Store {
 	 * @returns {Store}
 	 */
 	dispatch(name, ...params) {
-		if (this[name] && _.isFunction(this[name])) {
+		if (this[name] && typeof this[name] === 'function') {
 			this[name](...params);
 		}
 		return this;

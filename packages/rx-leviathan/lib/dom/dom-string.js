@@ -4,31 +4,37 @@
  */
 
 /**
- * Internal stream
+ * Buffer
  * @private
  * @type {string[]}
  */
 let buffer = [];
-let indentCount = 0;
-let indent = '  ';
 
 /**
- * Buffer Flush
- * @param {boolean} [reset = false]
- * @returns {string}
+ * Attribute Key Modifiers
+ * @type {Function[]}
  */
-const flush = (reset = false) => {
-	const out = buffer.join('');
-	if (reset) indentCount = 0;
-	buffer = [];
-	return out;
-}
+let attributeKeyModifiers = [
+	(key) => key.toLowerCase() === 'classname' ? 'class' : key
+];
+
+/**
+ * Attribute Value Modifiers
+ * @type {Function[]}
+ */
+let attributeValueModifiers = [];
+
+/**
+ * Content Modifiers
+ * @type {Function[]}
+ */
+let contentModifiers = [];
 
 /**
  * Applies a list of filter functions to a given value and return the result
  *
  * @param {any} value
- * @param {Function[]} modifiers
+ * @param {Function} modifiers
  * @returns {any}
  */
 const applyModifiers = (value, ...modifiers) => {
@@ -38,12 +44,12 @@ const applyModifiers = (value, ...modifiers) => {
 /**
  * Format attributes into a string
  * @param {object} attributes
- * @param {Function[]} modifiers
  * @returns {string}
  */
-export const attr = (attributes = {}, ...modifiers) => {
+export const attr = (attributes = {}) => {
 	if (!attributes) return '';
-	return ` ${Object.keys(attributes).map((key) => `${key}="${applyModifiers(attributes[key], ...modifiers)}"`).join(' ')}`;
+	return ` ${Object.keys(attributes).map((key) =>
+		`${applyModifiers(key, ...attributeKeyModifiers)}="${applyModifiers(attributes[key], ...attributeValueModifiers)}"`).join(' ')}`;
 };
 
 /**
@@ -54,8 +60,7 @@ export const attr = (attributes = {}, ...modifiers) => {
  * @returns {void}
  */
 export const elementOpen = (tagName, attributes = {}, selfClose = false) => {
-	if (!selfClose) indentCount++;
-	buffer.push(`${indent}<${tagName}${attr(attributes)}${selfClose ? ' />' : '>'}`);
+	buffer.push(`<${tagName}${attr(attributes)}${selfClose ? ' />' : '>'}`);
 };
 
 /**
@@ -64,18 +69,18 @@ export const elementOpen = (tagName, attributes = {}, selfClose = false) => {
  * @param {object} [attributes = {}]
  * @returns {void}
  */
-export const elementVoid = (tagName, attributes) => {
-	buffer.push(`${elementOpen(tagName, attributes, true)}`);
+export const elementVoid = (tagName, attributes= {}) => {
+	elementOpen(tagName, attributes, true);
 };
 
 /**
  * String Element Content
  * @param {any} content
- * @param {Function[]} modifiers
+ * @param {Function} modifiers
  * @returns {void}
  */
 export const text = (content, ...modifiers) => {
-	buffer.push(applyModifiers(content, ...modifiers));
+	buffer.push(`${applyModifiers(content, ...contentModifiers.concat(modifiers))}`);
 }
 
 /**
@@ -84,21 +89,20 @@ export const text = (content, ...modifiers) => {
  * @returns {void}
  */
 export const elementClose = (tagName) => {
-	indentCount--;
-	buffer.push(`${indent}</${tagName}>`);
+	buffer.push(`</${tagName}>`);
 }
 
 /**
  * Patch Strategy for Element to string
+ * @param {string[] | null} target
  * @param {Function | string} resolver
- * @param {boolean} [reset]
+ * @param {object} [data = {}]
  * @return {string}
  */
-export const patch = (resolver, reset) => {
-	if (!resolver) return '';
-	if (typeof resolver === 'function') {
-		resolver();
-		return flush(reset);
-	}
-	return resolver;
+export const patch = (target, resolver, data= {}) => {
+	if (!resolver || typeof resolver !== 'function') return '';
+	resolver();
+	const out = buffer.join('');
+	buffer = [];
+	return out;
 };

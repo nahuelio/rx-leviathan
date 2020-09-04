@@ -14,6 +14,12 @@ import * as DOM from 'incremental-dom';
 const isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
 
 /**
+ * Environment API for DOM manipulation
+ * @returns {DOM | DOMStr}
+ */
+const DOMApi = isBrowser ? DOM : DOMStr;
+
+/**
  * Returns an error if a given element is not valid, false otherwise.
  * @param {JSX.RxLeviathanElement} element
  * @returns {Error | boolean}
@@ -41,7 +47,7 @@ const isDomInvalid = (dom) => {
  * @returns void
  */
 const element = (tagName, props, ...children) => {
-	// TODO
+	// TODO: Client Side (FIX ISSUE with target)
 }
 
 /**
@@ -52,10 +58,14 @@ const element = (tagName, props, ...children) => {
  * @returns {string}
  */
 const elementToString = (tagName, props, ...children) => {
-	console.log(tagName, children);
-	return children.length > 0 ? children.map((child) => {
-
-	}).join('') : DOMStr.patch();
+	children = children.filter(Boolean);
+	if (children.length > 0) {
+		DOMApi.elementOpen(tagName, props)
+		DOMApi.text(children.map((child) => child).join(''));
+		DOMApi.elementClose(tagName);
+	} else {
+		DOMApi.elementVoid(tagName);
+	}
 };
 
 /**
@@ -67,8 +77,8 @@ const elementToString = (tagName, props, ...children) => {
  */
 export const create = (NameOrElement, props, ...children) => {
 	return typeof NameOrElement === 'function' ?
-		new NameOrElement({ ...props }).render() :
-		isBrowser ? element(NameOrElement, props, ...children) : elementToString(NameOrElement, props, ...children);
+		new NameOrElement(props).render() :
+		DOMApi.patch([], elementToString.bind(null, NameOrElement, props, ...children));
 };
 
 /**
@@ -81,5 +91,5 @@ export const render = (element, dom ) => {
 	const invalid = isElementInvalid(element) && isDomInvalid(dom);
 	if (invalid) throw invalid;
 	const resolver = create.bind(null, element, {}, []);
-	return isBrowser ? DOM.patch(dom, resolver) : DOMStr.patch(resolver, true);
+	return isBrowser ? DOMApi.patch(dom, resolver) : resolver();
 };

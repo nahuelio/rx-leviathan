@@ -14,8 +14,7 @@ const output = {
 	dir: './dist',
 	format: 'umd',
 	name: 'rx-leviathan',
-	exports: 'named',
-	sourcemap: true
+	exports: 'named'
 };
 
 /**
