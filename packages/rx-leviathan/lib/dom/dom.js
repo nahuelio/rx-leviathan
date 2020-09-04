@@ -14,12 +14,6 @@ import * as DOM from 'incremental-dom';
 const isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
 
 /**
- * DOM Api based on environment
- * @type {RxLeviathan.DOM}
- */
-const DOMApi = isBrowser ? DOM : DOMStr;
-
-/**
  * Returns an error if a given element is not valid, false otherwise.
  * @param {JSX.RxLeviathanElement} element
  * @returns {Error | boolean}
@@ -40,28 +34,41 @@ const isDomInvalid = (dom) => {
 };
 
 /**
- * Render Element
+ * Browser Render Element
  * @param {string} tagName
  * @param {RxLeviathanAttributes} props
- * @param {any} children
+ * @param {Function[] | string[]} children
+ * @returns void
  */
-const renderElement = (tagName, props, children) => {
-	// TODO: Continue working here...
-	console.log(tagName, props, children);
-	return '';
+const element = (tagName, props, ...children) => {
+	// TODO
+}
+
+/**
+ * Server Render Element
+ * @param {string} tagName
+ * @param {RxLeviathanAttributes} props
+ * @param {Function[] | string[]} children
+ * @returns {string}
+ */
+const elementToString = (tagName, props, ...children) => {
+	console.log(tagName, children);
+	return children.length > 0 ? children.map((child) => {
+
+	}).join('') : DOMStr.patch();
 };
 
 /**
  * Factory for instantiating JSX.LeviathanElement
  * @param {JSX.RxLeviathanElement} NameOrElement
  * @param {Maybe<any>} props
- * @param {Maybe<View>} [children]
+ * @param {Function[] | string[]} children
  * @returns {string | void}
  */
-export const create = (NameOrElement, props, children) => {
+export const create = (NameOrElement, props, ...children) => {
 	return typeof NameOrElement === 'function' ?
-		new NameOrElement({ ...props, children }).render() :
-		renderElement(NameOrElement, props, children);
+		new NameOrElement({ ...props }).render() :
+		isBrowser ? element(NameOrElement, props, ...children) : elementToString(NameOrElement, props, ...children);
 };
 
 /**
@@ -73,5 +80,6 @@ export const create = (NameOrElement, props, children) => {
 export const render = (element, dom ) => {
 	const invalid = isElementInvalid(element) && isDomInvalid(dom);
 	if (invalid) throw invalid;
-	return DOMApi.patch(dom, create.bind(null, element, {}, null));
+	const resolver = create.bind(null, element, {}, []);
+	return isBrowser ? DOM.patch(dom, resolver) : DOMStr.patch(resolver, true);
 };

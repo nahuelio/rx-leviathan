@@ -30,8 +30,10 @@
   },
   "scripts": {
     "build": "rollup -c --silent",
+    "build-all": "cross-env ENV=prod rollup -c --silent",
     "serve": "ts-node server/server.ts",
-    "start": "nodemon --exec \"npm run build && npm run serve\""
+    "dev": "nodemonx --exec \"npm run build && npm run serve\"",
+    "start": "nodemon --exec \"npm run build-all && npm run serve\""
   },
   "bugs": {
     "url": "https://github.com/nahuelio/rx-leviathan/issues"

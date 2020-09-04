@@ -14,8 +14,11 @@ export class ComponentA extends View<ComponentAProps, ExampleStore> {
 	}
 
 	render(): Maybe<JSX.RxLeviathanElement> {
-		return <p className={`${this.props.className}`}>
-			Component A
-		</p>;
+		return (
+			<div className={`${this.props.className}`}>
+				<span>Component A</span>
+				<hr />
+			</div>
+		);
 	}
 }

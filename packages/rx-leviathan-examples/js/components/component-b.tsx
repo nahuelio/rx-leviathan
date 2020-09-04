@@ -17,7 +17,7 @@ export class ComponentB extends View<ComponentBProps, ExampleStore> {
 		const { className, counter } = this.props;
 		return <div className={`${className}`}>
 			<h4>Component B</h4>
-			<span>Counter {counter}</span>
+			<span>Counter {counter ? 'counter exists' : 'counter does not exists'}</span>
 			<button onclick={this.increase}>+</button>
 			<button onclick={this.decrease}>-</button>
 		</div>;

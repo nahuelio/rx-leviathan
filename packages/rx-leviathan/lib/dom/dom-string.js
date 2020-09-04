@@ -9,13 +9,17 @@
  * @type {string[]}
  */
 let buffer = [];
+let indentCount = 0;
+let indent = '  ';
 
 /**
  * Buffer Flush
+ * @param {boolean} [reset = false]
  * @returns {string}
  */
-const flush = () => {
+const flush = (reset = false) => {
 	const out = buffer.join('');
+	if (reset) indentCount = 0;
 	buffer = [];
 	return out;
 }
@@ -38,7 +42,8 @@ const applyModifiers = (value, ...modifiers) => {
  * @returns {string}
  */
 export const attr = (attributes = {}, ...modifiers) => {
-	return Object.keys(attributes).map((key) => `${key}=${applyModifiers(attributes[key], ...modifiers)}`).join(' ');
+	if (!attributes) return '';
+	return ` ${Object.keys(attributes).map((key) => `${key}="${applyModifiers(attributes[key], ...modifiers)}"`).join(' ')}`;
 };
 
 /**
@@ -49,7 +54,8 @@ export const attr = (attributes = {}, ...modifiers) => {
  * @returns {void}
  */
 export const elementOpen = (tagName, attributes = {}, selfClose = false) => {
-	buffer.push(`<${tagName} ${attr(attributes)}${selfClose ? ' />' : '>'}`);
+	if (!selfClose) indentCount++;
+	buffer.push(`${indent}<${tagName}${attr(attributes)}${selfClose ? ' />' : '>'}`);
 };
 
 /**
@@ -78,18 +84,21 @@ export const text = (content, ...modifiers) => {
  * @returns {void}
  */
 export const elementClose = (tagName) => {
-	buffer.push(`</${tagName}>`);
+	indentCount--;
+	buffer.push(`${indent}</${tagName}>`);
 }
 
 /**
  * Patch Strategy for Element to string
- * @param {string[]} target
- * @param {Function} resolver
- * @return {string | null}
+ * @param {Function | string} resolver
+ * @param {boolean} [reset]
+ * @return {string}
  */
-export const patch = (target, resolver) => {
-	if (!resolver) return null;
-	if (target && target instanceof Array) buffer = target;
-	resolver();
-	return flush();
+export const patch = (resolver, reset) => {
+	if (!resolver) return '';
+	if (typeof resolver === 'function') {
+		resolver();
+		return flush(reset);
+	}
+	return resolver;
 };
