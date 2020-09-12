@@ -1,6 +1,10 @@
 /**
  * Incremental DOM to String
+ * @module RxLeviathan.DOMString
  * @author Patricio Ferreira <3dimentionar@gmail.com>
+ *
+ * TODO:
+ * 	- Create API to register content filters for SSR
  */
 
 /**
@@ -11,18 +15,25 @@
 let buffer = [];
 
 /**
- * Attribute Key Modifiers
+ * Attribute Value Modifiers
+ * @const
  * @type {Function[]}
  */
-let attributeKeyModifiers = [
-	(key) => key.toLowerCase() === 'classname' ? 'class' : key
+const attributeModifiers = [
+	// Don't serialize functions
+	(memo, current) => current && typeof current.value === 'function' ? null : current,
+	// Apply Attribute Key modifiers
+	(memo, current) => memo ? { ...memo, key: applyModifiers(current.key, ...attributeKeyModifiers), value: current.value } : memo
 ];
 
 /**
- * Attribute Value Modifiers
+ * Default attribute key modifiers
+ * @const
  * @type {Function[]}
  */
-let attributeValueModifiers = [];
+const attributeKeyModifiers = [
+	(key) => key.toLowerCase() === 'classname' ? 'class' : key
+];
 
 /**
  * Content Modifiers
@@ -38,7 +49,10 @@ let contentModifiers = [];
  * @returns {any}
  */
 const applyModifiers = (value, ...modifiers) => {
-	return modifiers ? modifiers.reduce((memo, modifier) => (memo = modifier(memo)), value) : value;
+	return modifiers.reduce((memo, modifier) => {
+		memo = modifier(memo, value);
+		return memo;
+	}, value);
 };
 
 /**
@@ -48,8 +62,11 @@ const applyModifiers = (value, ...modifiers) => {
  */
 export const attr = (attributes = {}) => {
 	if (!attributes) return '';
-	return ` ${Object.keys(attributes).map((key) =>
-		`${applyModifiers(key, ...attributeKeyModifiers)}="${applyModifiers(attributes[key], ...attributeValueModifiers)}"`).join(' ')}`;
+	return ` ${Object.keys(attributes)
+		.map((key) => applyModifiers({ key, value: attributes[key] }, ...attributeModifiers))
+		.filter(Boolean)
+		.map((attribute) => `${attribute.key}="${attribute.value}"`)
+		.join(' ')}`;
 };
 
 /**
@@ -94,15 +111,31 @@ export const elementClose = (tagName) => {
 
 /**
  * Patch Strategy for Element to string
- * @param {string[] | null} target
  * @param {Function | string} resolver
- * @param {object} [data = {}]
  * @return {string}
  */
-export const patch = (target, resolver, data= {}) => {
+export const patch = (resolver) => {
 	if (!resolver || typeof resolver !== 'function') return '';
 	resolver();
 	const out = buffer.join('');
 	buffer = [];
 	return out;
 };
+
+/**
+ * Serialize Element to string
+ * @param {string} tagName
+ * @param {RxLeviathanAttributes} props
+ * @param {Function[] | string[]} children
+ * @returns {string}
+ */
+export const toString = (tagName, props, ...children) => {
+	children = children.filter(Boolean);
+	if (children.length > 0) {
+		elementOpen(tagName, props)
+		text(children.map((child) => child).join(''));
+		elementClose(tagName);
+	} else {
+		elementVoid(tagName);
+	}
+}

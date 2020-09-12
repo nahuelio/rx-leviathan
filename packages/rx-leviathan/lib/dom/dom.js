@@ -14,12 +14,6 @@ import * as DOM from 'incremental-dom';
 const isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
 
 /**
- * Environment API for DOM manipulation
- * @returns {DOM | DOMStr}
- */
-const DOMApi = isBrowser ? DOM : DOMStr;
-
-/**
  * Returns an error if a given element is not valid, false otherwise.
  * @param {JSX.RxLeviathanElement} element
  * @returns {Error | boolean}
@@ -40,56 +34,60 @@ const isDomInvalid = (dom) => {
 };
 
 /**
- * Browser Render Element
- * @param {string} tagName
- * @param {RxLeviathanAttributes} props
- * @param {Function[] | string[]} children
- * @returns void
+ * Server Side Rendering Create Strategy (Incremental DOM to string)
+ * @param {JSX.RxLeviathanElement | string} NameOrElement
+ * @param {RxLeviathan.RxLeviathanAttributes} props
+ * @param {...object} children
+ * @returns {string | void}
  */
-const element = (tagName, props, ...children) => {
-	// TODO: Client Side (FIX ISSUE with target)
-}
-
-/**
- * Server Render Element
- * @param {string} tagName
- * @param {RxLeviathanAttributes} props
- * @param {Function[] | string[]} children
- * @returns {string}
- */
-const elementToString = (tagName, props, ...children) => {
-	children = children.filter(Boolean);
-	if (children.length > 0) {
-		DOMApi.elementOpen(tagName, props)
-		DOMApi.text(children.map((child) => child).join(''));
-		DOMApi.elementClose(tagName);
-	} else {
-		DOMApi.elementVoid(tagName);
-	}
+const createServer = (NameOrElement, props, ...children) => {
+	return typeof NameOrElement === 'function' ?
+		new NameOrElement(props).render() :
+		DOMStr.patch(DOMStr.toString.bind(null, NameOrElement, props, ...children));
 };
 
 /**
- * Factory for instantiating JSX.LeviathanElement
+ * Client Resolver Strategy
+ * @param {string} tagName
+ * @param {RxLeviathan.RxLeviathanAttributes} props
+ * @param {...object} children
+ * @returns {void}
+ */
+const clientResolver = (tagName, props, ...children) => {
+	// TODO: Implementation
+};
+
+/**
+ * Client Side Rendering Create (Incremental DOM)
+ * @param {HTMLElement} dom
+ * @param {JSX.RxLeviathanElement} NameOrElement
+ * @param {RxLeviathan.RxLeviathanAttributes} props
+ * @param {...object} children
+ * @returns {string | void}
+ */
+const createClient = (dom, NameOrElement, props, ...children) => {
+	return typeof NameOrElement === 'function' ?
+		new NameOrElement(props).render() :
+		DOM.patch(dom, clientResolver.bind(NameOrElement, props, ...children));
+};
+
+/**
+ * Determines Create Strategy based on environment.
  * @param {JSX.RxLeviathanElement} NameOrElement
  * @param {Maybe<any>} props
  * @param {Function[] | string[]} children
  * @returns {string | void}
  */
-export const create = (NameOrElement, props, ...children) => {
-	return typeof NameOrElement === 'function' ?
-		new NameOrElement(props).render() :
-		DOMApi.patch([], elementToString.bind(null, NameOrElement, props, ...children));
-};
+export const create = isBrowser ? createClient : createServer;
 
 /**
  * Client/Server DOM Rendering strategy
  * @param {JSX.RxLeviathanElement} element
- * @param {HTMLElement | string[]} dom
+ * @param {HTMLElement} dom
  * @returns {string | HTMLElement}
  */
 export const render = (element, dom ) => {
 	const invalid = isElementInvalid(element) && isDomInvalid(dom);
 	if (invalid) throw invalid;
-	const resolver = create.bind(null, element, {}, []);
-	return isBrowser ? DOMApi.patch(dom, resolver) : resolver();
+	return isBrowser ? create(dom, element, {}) : create(element, {});
 };

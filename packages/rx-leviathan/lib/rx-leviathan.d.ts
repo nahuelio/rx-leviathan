@@ -44,13 +44,14 @@ declare namespace RxLeviathan {
 	}
 
 	/** DOM To String Module **/
-	interface DOM {
+	interface DOMString {
 		attr(attributes?: object, ...modifiers: Function[]): string | void;
 		text(content: any, ...modifiers: Function[]): void;
 		elementOpen(tagName: string, key?: RxLeviathanKey, statics?: RxLeviathanAttributes<any>, ...args): void;
 		elementVoid(tagName: string, key?: RxLeviathanKey, statics?: RxLeviathanAttributes<any>, ...args): void;
 		elementClose(tagName: string): void;
-		patch(target: HTMLElement | ReadableStream<any>, resolver: Function): string | void;
+		patch(resolver: Function): string | void;
+		toString(tagName: keyof JSX.IntrinsicElements, props: Props, ...children: any[]): string;
 	}
 
 	/** Top-Level Module **/
@@ -76,7 +77,6 @@ declare namespace RxLeviathan {
 declare global {
 	namespace JSX {
 		type RxLeviathanElement = keyof IntrinsicElements | RxLeviathan.View;
-
 		/**
 		 * Non-synthetic intrinsic elements (Using dom.lib)
 		 */

@@ -6,7 +6,7 @@
 
 /**
  * Retrieve registered artifact by his unique symbol
- * @param {RxLeviathan.Maybe<Symbol>} [symbol]
+ * @param {Symbol} [symbol]
  * @returns {RxLeviathan.Maybe<RxLeviathan.RxLeviathanElements>}
  */
 export const get = (symbol) => {
