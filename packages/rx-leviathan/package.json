@@ -59,7 +59,7 @@
     "files": [
       {
         "path": "./dist/rx-leviathan.min.js",
-        "maxSize": "30kB"
+        "maxSize": "6kB"
       }
     ]
   },

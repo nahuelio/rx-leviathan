@@ -16,9 +16,9 @@ export class View {
 
 	/**
 	 * @private
-	 * @type {RxLeviathan.Maybe<RxLeviathan.Store>}
+	 * @type {RxLeviathan.Maybe<RxLeviathan.Store>[]}
 	 */
-	_store = null;
+	_stores = [];
 
 	/**
 	 * @private
@@ -39,14 +39,6 @@ export class View {
 	 */
 	get props() {
 		return this._props;
-	}
-
-	/**
-	 * Get Store
-	 * @returns {RxLeviathan.Store}
-	 */
-	get store() {
-		return this._store;
 	}
 
 	/**
@@ -71,6 +63,19 @@ export class View {
 	 */
 	constructor(props) {
 		Object.assign(this, { _props: props || {}, uid: Symbol.for('View') });
+	}
+
+	/**
+	 * Dispatch action over any of the subscribed stores
+	 * @param {RxLeviathan.StoreAction<RxLeviathan.Store>} action
+	 * @param {...any} params
+	 * @returns {View}
+	 */
+	dispatch(action, ...params) {
+		this._stores.forEach((store) => {
+			if (store[action]) store[action](...params);
+		});
+		return this;
 	}
 
 	/**

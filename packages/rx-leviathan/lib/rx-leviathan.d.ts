@@ -17,30 +17,29 @@ declare namespace RxLeviathan {
 	type RxLeviathanAttributes<T> = { [P in keyof T]: any };
 
 	type Props<T = {}> = { [K in keyof Partial<T>]: any; };
-	type StoreAction<S> = keyof Omit<S, 'state' | 'dispatch'>;
-	type RxLeviathanElements = Store<{}> | View;
+	type StoreAction<S> = keyof Omit<S, 'state'>;
+	type RxLeviathanElements = Store | View<Props>;
 	type SubscriptionHash<P> = {
-		[K in keyof P]: <V extends View>(subscriber: V) => any
+		[K in keyof P]: <V extends View<Props>>(subscriber: V) => any
 	};
 
 	/** Store Module **/
 
-	interface Store<Props> {}
-	class Store<Props> {
+	interface Store {}
+	class Store {
 		readonly state: Props;
-		dispatch(action: StoreAction<this>, ...params: any[]): Store<Props>;
 		constructor(initial: Maybe<Props>);
 	}
 
 	/** View Module **/
 
-	interface View<Props = {}, Store = {}> {}
-	class View<Props, Store> {
-		readonly props: Props;
-		readonly store: Omit<Store, 'state'>;
-		readonly subscriptions: SubscriptionHash<Partial<Props>>;
+	interface View<P extends Props, S = Store> {}
+	class View<P, S> {
+		readonly props: P;
+		readonly subscriptions: SubscriptionHash<P>;
+		dispatch(action: StoreAction<S>, ...params: any[]): View<P>;
 		render(): Maybe<JSX.RxLeviathanElement>;
-		constructor(props?: Maybe<Props>);
+		constructor(props?: Maybe<P>);
 	}
 
 	/** DOM To String Module **/
@@ -60,12 +59,12 @@ declare namespace RxLeviathan {
 	const VERSION: string;
 
 	/** Decorators **/
-	function Subscribes<F extends Function, S = Store<any>>(...stores: S[]): F; // Class Decorator / Function
-	function Observable<F extends Function>(ctor: F): F; // Class Decorator / Function
-	function Action<M extends Function>(method: M): any; // Method Decorator / Function
+	function Subscribes<V extends Function>(...stores: typeof Store[]): V; // Class Decorator / Function
+	function Observable<S extends typeof Store>(ctor: S): S; // Class Decorator / Function
+	function Action<M extends Function>(method: M): M; // Method Decorator / Function
 
 	/** Core Functions **/
-	function create(element: JSX.RxLeviathanElement, props: Props, children?: JSX.RxLeviathanElement): RxLeviathan.View;
+	function create(element: JSX.RxLeviathanElement, props: Props, children?: JSX.RxLeviathanElement): View<any>;
 	function render(element: JSX.RxLeviathanElement, dom?: HTMLElement): string | JSX.IntrinsicElements | void;
 	function get(symbol?: Symbol): Maybe<RxLeviathanElements>;
 }
@@ -76,7 +75,7 @@ declare namespace RxLeviathan {
  */
 declare global {
 	namespace JSX {
-		type RxLeviathanElement = keyof IntrinsicElements | RxLeviathan.View;
+		type RxLeviathanElement = keyof IntrinsicElements | RxLeviathan.View<any>;
 		/**
 		 * Non-synthetic intrinsic elements (Using dom.lib)
 		 */

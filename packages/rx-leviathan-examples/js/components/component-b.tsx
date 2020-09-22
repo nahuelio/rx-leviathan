@@ -1,16 +1,16 @@
 import RxLeviathan, { Maybe, PartialPick, Subscribes, View } from '@nahuelio/rx-leviathan';
-import { ExampleStore, ExampleStoreProps } from '../store/example';
+import { CounterStore, CounterStoreProps } from '../store/counter';
 
-type ComponentBProps = PartialPick<HTMLElement, 'className'> & ExampleStoreProps;
+type ComponentBProps = PartialPick<HTMLElement, 'className'> & CounterStoreProps;
 
-@Subscribes(ExampleStore)
-export class ComponentB extends View<ComponentBProps, ExampleStore> {
+@Subscribes(CounterStore)
+export class ComponentB extends View<ComponentBProps, CounterStore> {
 	increase() {
-		this.store.dispatch('increase');
+		this.dispatch('increase');
 	}
 
 	decrease() {
-		this.store.dispatch('decrease');
+		this.dispatch('decrease');
 	}
 
 	render(): Maybe<JSX.RxLeviathanElement> {
