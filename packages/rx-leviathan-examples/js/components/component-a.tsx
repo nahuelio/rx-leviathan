@@ -1,4 +1,4 @@
-import RxLeviathan, { Maybe, PartialPick, Subscribes, View } from '@nahuelio/rx-leviathan';
+import RxLeviathan, { Maybe, PartialPick, Subscribes, SubscriptionHash, View } from '@nahuelio/rx-leviathan';
 import { CounterStore, CounterStoreProps } from '../store/counter';
 import { GreetingStore, GreetingStoreProps } from '../store/greeting';
 
@@ -6,7 +6,7 @@ type ComponentAProps = PartialPick<HTMLElement, 'className' | 'onclick'> & Count
 
 @Subscribes(CounterStore, GreetingStore)
 export class ComponentA extends View<ComponentAProps, CounterStore & GreetingStore> {
-	readonly subscriptions = {
+	readonly subscriptions: SubscriptionHash<ComponentAProps> = {
 		greeting: null,
 		counter: this.onCounterChange
 	};

@@ -39,7 +39,7 @@ export const Observable = (ctor) => {
 /**
  * Action Method Decorator
  * @param {Function} method
- * @returns {any}
+ * @returns {Function}
  */
 export const Action = (method) => {
 	return method;

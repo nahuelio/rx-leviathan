@@ -36,17 +36,4 @@ export class Store {
 	constructor(initial) {
 		Object.assign(this, { state: initial || null, uid: Symbol.for('Store') });
 	}
-
-	/**
-	 * Dispatches an action with a given name and optionally passing parameters.
-	 * @param {RxLeviathan.StoreAction} name
-	 * @param {any[]} params
-	 * @returns {Store}
-	 */
-	dispatch(name, ...params) {
-		if (this[name] && typeof this[name] === 'function') {
-			this[name](...params);
-		}
-		return this;
-	}
 }

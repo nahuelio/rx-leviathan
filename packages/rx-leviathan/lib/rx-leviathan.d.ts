@@ -20,7 +20,7 @@ declare namespace RxLeviathan {
 	type StoreAction<S> = keyof Omit<S, 'state'>;
 	type RxLeviathanElements = Store | View<Props>;
 	type SubscriptionHash<P> = {
-		[K in keyof P]: <V extends View<Props>>(subscriber: V) => any
+		[K in keyof P]: Maybe<<V extends View<P>>(subscriber: V) => any> | undefined
 	};
 
 	/** Store Module **/
@@ -59,9 +59,13 @@ declare namespace RxLeviathan {
 	const VERSION: string;
 
 	/** Decorators **/
-	function Subscribes<V extends Function>(...stores: typeof Store[]): V; // Class Decorator / Function
-	function Observable<S extends typeof Store>(ctor: S): S; // Class Decorator / Function
-	function Action<M extends Function>(method: M): M; // Method Decorator / Function
+
+	// Class Decorator / Function
+	function Subscribes<V extends Function>(...stores: typeof Store[]): V;
+	// Class Decorator / Function
+	function Observable<S extends typeof Store>(ctor: S): S;
+	// Method Decorator / Function
+	function Action(target: any, propertyKey: string, descriptor: PropertyDescriptor): PropertyDescriptor;
 
 	/** Core Functions **/
 	function create(element: JSX.RxLeviathanElement, props: Props, children?: JSX.RxLeviathanElement): View<any>;
