@@ -15,7 +15,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          - node-version: '12.x'
+          node-version: '12.x'
 
       - name: Run RxLeviathan Compiler Unit Tests
         run: |
