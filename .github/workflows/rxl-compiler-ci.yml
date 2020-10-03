@@ -4,8 +4,6 @@ on:
   push:
     branches-ignore:
       - 'master'
-    paths:
-      - 'packages/rx-leviathan-compiler/**'
 
 jobs:
   quality:
@@ -19,7 +17,7 @@ jobs:
         with:
           - node-version: '12.x'
 
-      - name: Run Unit Tests
+      - name: Run RxLeviathan Compiler Unit Tests
         run: |
           cd ./packages/rx-leviathan-compiler
           npm install
@@ -28,4 +26,4 @@ jobs:
       - name: Coveralls Report
         uses: coverallsapp/github-action@master
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          - github-token: ${{ secrets.GITHUB_TOKEN }}
