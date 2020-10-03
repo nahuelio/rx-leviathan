@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+
+require('json5/lib/register');
+require('../dist/rxl')(process.argv);

@@ -1,0 +1,31 @@
+name: RxLeviathan Compiler
+
+on:
+  push:
+    branches-ignore:
+      - 'master'
+    paths:
+      - 'packages/rx-leviathan-compiler/**'
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+      - uses: actions/checkout@v2
+
+      - name: Setup Node
+      - uses: actions/setup-node@v1
+        with:
+          - node-version: '12.x'
+
+      - name: Run Unit Tests
+        run: |
+          cd ./packages/rx-leviathan-compiler
+          npm install
+          npm run coverage
+
+      name: Coveralls Report
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
