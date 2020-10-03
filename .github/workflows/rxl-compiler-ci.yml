@@ -26,4 +26,4 @@ jobs:
       - name: Coveralls Report
         uses: coverallsapp/github-action@master
         with:
-          - github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
