@@ -30,7 +30,7 @@
     "build-dev": "cross-env ENV=dev rollup -c --silent",
     "build": "cross-env ENV=prod rollup -c",
     "test": "cross-env ENV=test mocha --w --config .mocharc.js \\\"test/**/*.test.ts\\\"",
-    "coverage": "cross-env ENV=test nyc mocha --config .mocharc.js \\\"test/**/.test.ts\\\""
+    "coverage": "cross-env ENV=test nyc mocha --config .mocharc.js \\\"test/**/*.test.ts\\\""
   },
   "bugs": {
     "url": "https://github.com/nahuelio/rx-leviathan/issues"
