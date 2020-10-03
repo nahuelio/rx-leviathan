@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Setup Node
-      - uses: actions/setup-node@v1
+        uses: actions/setup-node@v1
         with:
           - node-version: '12.x'
 
@@ -25,7 +25,7 @@ jobs:
           npm install
           npm run coverage
 
-      name: Coveralls Report
+      - name: Coveralls Report
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
