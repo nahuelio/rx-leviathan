@@ -25,12 +25,11 @@ jobs:
 
       - name: Show me where I'm and coverage lcov file
         run: |
-          pwd
+          cd ./packages/rx-leviathan-compiler
           ls -la
 
       - name: Coveralls Report
         uses: coverallsapp/github-action@master
         with:
-          base-path: 'packages/rx-leviathan-compiler'
-          path-to-lcov: './coverage/lcov.info'
+          path-to-lcov: 'packages/rx-leviathan-compiler/coverage/lcov.info'
           github-token: ${{ secrets.GITHUB_TOKEN }}
