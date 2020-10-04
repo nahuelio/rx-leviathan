@@ -6,7 +6,7 @@ on:
       - 'master'
 
 jobs:
-  quality:
+  Code Quality:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -27,5 +27,5 @@ jobs:
         uses: coverallsapp/github-action@master
         with:
           base-path: 'packages/rx-leviathan-compiler'
-          pato-to-lcov: './coverage/lcov.info'
+          path-to-lcov: './coverage/lcov.info'
           github-token: ${{ secrets.GITHUB_TOKEN }}
