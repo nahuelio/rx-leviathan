@@ -6,9 +6,8 @@ on:
       - 'main'
     paths:
       - 'packages/rx-leviathan-compiler'
-    paths-ignore:
-      - '**/*.md'
-      - '**/*.LICENSE'
+      - '!**/*.md'
+      - '!**/*.LICENSE'
 
 jobs:
   CodeQuality:
