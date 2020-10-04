@@ -23,6 +23,11 @@ jobs:
           npm install
           npm run coverage
 
+      - name: Show me where I'm and coverage lcov file
+        run: |
+          pwd
+          ls -la
+
       - name: Coveralls Report
         uses: coverallsapp/github-action@master
         with:
