@@ -1,0 +1,11 @@
+{
+	"watch": [
+		"bin/*",
+		"lib/*.js",
+		"lib/**/*",
+		"config/*.js",
+		"config/*",
+		"ts-config.json",
+		"rollup.config.js"
+	]
+}

@@ -3,7 +3,12 @@ name: RxLeviathan Compiler
 on:
   push:
     branches-ignore:
-      - 'master'
+      - 'main'
+    paths:
+      - 'packages/rx-leviathan-compiler'
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.LICENSE'
 
 jobs:
   CodeQuality:
@@ -23,13 +28,9 @@ jobs:
           npm install
           npm run coverage
 
-      - name: Show me where I'm and coverage lcov file
-        run: |
-          cd ./packages/rx-leviathan-compiler
-          ls -la
-
-      - name: Coveralls Report
-        uses: coverallsapp/github-action@master
+      - name: Code Coverage Report
+        uses: codecov/codecov-action@v1.0.13
         with:
-          path-to-lcov: 'packages/rx-leviathan-compiler/coverage/lcov.info'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          name: 'rx-leviathan-compiler'
+          directory: 'packages/rx-leviathan-compiler/coverage'
+          token: ${{ secrets.RLX_CC_TOKEN }}
