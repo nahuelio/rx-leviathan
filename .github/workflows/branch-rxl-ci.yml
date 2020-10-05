@@ -28,8 +28,8 @@ jobs:
           npm run coverage
 
       - name: Code Coverage Report
-          uses: codecov/codecov-action@v1
-          with:
-            name: 'rx-leviathan'
-            directory: 'packages/rx-leviathan/coverage'
-            token: ${{ secrets.RLX_CC_TOKEN }}
+        uses: codecov/codecov-action@v1
+        with:
+          name: 'rx-leviathan'
+          directory: 'packages/rx-leviathan/coverage'
+          token: ${{ secrets.RLX_CC_TOKEN }}
