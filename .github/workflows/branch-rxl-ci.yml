@@ -6,8 +6,6 @@ on:
       - 'main'
     paths:
       - 'packages/rx-leviathan'
-      - '!**/*.md'
-      - '!**/*.LICENSE'
 
 jobs:
   CodeQuality:
