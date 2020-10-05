@@ -8,6 +8,6 @@ import * as ts from 'typescript';
  * RxLeviathan Compiler
  */
 export default (fileNames: string[]) => {
-	console.log('Test');
+	console.log('Test 1');
 	process.exit(0);
 };

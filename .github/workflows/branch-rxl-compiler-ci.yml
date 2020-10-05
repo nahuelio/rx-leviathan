@@ -5,7 +5,7 @@ on:
     branches-ignore:
       - 'main'
     paths:
-      - 'packages/rx-leviathan-compiler'
+      - 'packages/rx-leviathan-compiler/**'
 
 jobs:
   CodeQuality:
