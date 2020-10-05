@@ -1,4 +1,4 @@
-name: RxLeviathan Compiler
+name: RxLeviathan Library
 
 on:
   push:
