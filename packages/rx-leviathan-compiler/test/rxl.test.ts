@@ -1,9 +1,9 @@
-const rxLeviathanCompiler = require('../lib/rxlc');
+import { compile } from '../lib/rxlc';
 
-describe('RxLc Compiler', function() {
-    before(() => {});
-
-    it('needs tests', () => {
-        // TODO
+describe('RxLc Compiler', () => {
+    describe('compile()', () => {
+        it('needs tests', () => {
+            compile([global['__RXL_PATH__']]);
+        });
     });
 });

@@ -8,8 +8,9 @@
 		"esModuleInterop": true,
 		"experimentalDecorators": true,
 		"typeRoots": [
-			"node_modules/@types",
-			"@types"
+			"../node_modules/@types",
+			"./node_modules/@types",
+			"./@types"
 		],
 		"types": [
 			"node",

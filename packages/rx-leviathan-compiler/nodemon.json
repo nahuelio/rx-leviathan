@@ -1,11 +1,13 @@
 {
 	"watch": [
 		"bin/*",
-		"lib/*.js",
-		"lib/**/*",
+		"lib/*",
+		"lib/*.ts",
+		"test/*",
+		"test/*.ts",
 		"config/*.js",
-		"config/*",
-		"ts-config.json",
+		"tsconfig.json",
 		"rollup.config.js"
-	]
+	],
+	"ext": "js,ts,json,msj"
 }

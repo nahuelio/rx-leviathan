@@ -1,13 +1,10 @@
 /**
- * @module @nahuelio.rxl
+ * @module @nahuelio.rxlc
  * @author Patricio Ferreira <3dimentionar@gmail.com>
  */
-import * as ts from 'typescript';
+import { compile } from './compiler';
+const environment = process.env.ENV || 'test';
+if (environment !== 'test') compile(process.argv.slice(2));
 
-/**
- * RxLeviathan Compiler
- */
-export default (fileNames: string[]) => {
-	console.log('Test 1');
-	process.exit(0);
-};
+export const VERSION = '__VERSION__';
+export { compile };

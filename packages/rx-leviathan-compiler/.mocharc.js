@@ -16,9 +16,5 @@ module.exports = {
 	extension: ['ts', 'json5'],
 	'inline-diffs': true,
 	timeout: 2000,
-	reporter: 'spec',
-	'watch-files': [
-		'lib/**/*.ts',
-		'test/**/*.ts'
-	]
+	reporter: 'spec'
 };
