@@ -1,11 +1,11 @@
-name: RxLeviathan Compiler
+name: RxLeviathan Utils
 
 on:
   push:
     branches-ignore:
       - 'main'
     paths:
-      - 'packages/rx-leviathan-compiler/**'
+      - 'packages/rx-leviathan-utils/**'
 
 jobs:
   CodeQuality:
@@ -19,9 +19,9 @@ jobs:
         with:
           node-version: '12.x'
 
-      - name: Run RxLeviathan Compiler Unit Tests
+      - name: Run RxLeviathan Utils Unit Tests
         run: |
-          cd ./packages/rx-leviathan-compiler
+          cd ./packages/rx-leviathan-utils
           npm install
           npm run coverage
 
