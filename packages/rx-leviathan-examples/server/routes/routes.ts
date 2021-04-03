@@ -2,7 +2,6 @@
  * Application Routes
  */
 import 'systemjs';
-import { resolve } from 'path';
 import { readdirSync } from 'fs';
 import { Router } from 'express';
 

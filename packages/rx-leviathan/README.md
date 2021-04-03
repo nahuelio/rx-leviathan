@@ -1,15 +1,11 @@
-# Rx Leviathan
-
-##### `@nahuelio/rx-leviathan`
+# `rx-leviathan-compiler`
 ![Documentation Coverage](docs/badge.svg "Documentation Coverage")
-
 > TODO: description
 
 ## Usage
 
-TODO
+```
+const rxl = require('rx-leviathan-compiler');
 
----
-LICENSE Information (Link)
-<br />
-Made with :heart: by [Nahuel IO](http://nahuel.io/)
+// TODO: DEMONSTRATE API
+```

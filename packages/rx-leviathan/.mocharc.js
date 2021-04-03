@@ -1,16 +1,27 @@
+'use strict';
+
+const path = require('path');
+
 /**
- * Mocha Options
+ * Mocha Configuration
  */
 module.exports = {
-	diff: true,
-	extension: ['js'],
 	package: './package.json',
-	reporter: 'spec',
 	slow: 75,
 	timeout: 2000,
 	ui: 'bdd',
+	diff: true,
+	'inline-diffs': true,
+	reporter: 'spec',
 	global: ['chai', 'sinon'],
-	require: ['@babel/register', 'jsdom-global/register', './test/setup.js'],
-	spec: 'test/**/*.test.js',
-	'watch-files': ['lib/**/*.js', 'test/**/*.js']
+	spec: 'test/**/*.test.ts',
+	require: [
+		'ts-node/register',
+		'json5/lib/register',
+		'chai/register-assert',
+		'jsdom-global/register',
+		path.resolve(__dirname) + '/test/globals.ts'
+	],
+	extension: ['ts', 'json5'],
+	'watch-files': ['lib/**/*.ts', 'test/**/*.ts']
 };

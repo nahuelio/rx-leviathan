@@ -25,9 +25,7 @@ jobs:
           npm install
           npm run coverage
 
-      - name: Code Coverage Report
-        uses: codecov/codecov-action@v1
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
         with:
-          name: 'rx-leviathan-compiler'
-          directory: 'packages/rx-leviathan-compiler/coverage'
-          token: ${{ secrets.RLX_CC_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}

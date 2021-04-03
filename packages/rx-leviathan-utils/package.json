@@ -1,0 +1,35 @@
+{
+  "name": "@nahuelio/rx-leviathan-utils",
+  "version": "1.0.0",
+  "description": "Utility package used for the rx-leviathan ecosystem",
+  "keywords": [
+    "utilities",
+    "leviathan",
+    "reactive"
+  ],
+  "author": "Patricio Ferreira <3dimentionar@gmail.com>",
+  "homepage": "https://github.com/nahuelio/rx-leviathan/tree/master/packages/rx-leviathan-utils#readme",
+  "license": "UNLICENSED",
+  "main": "lib/index.js",
+  "types": "@types/rx-leviathan-utils.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nahuelio/rx-leviathan.git"
+  },
+  "scripts": {
+    "test": "TODO"
+  },
+  "bugs": {
+    "url": "https://github.com/nahuelio/rx-leviathan/issues"
+  },
+  "dependencies": {
+    "colorette": "1.2.1"
+  }
+}

@@ -1,0 +1,33 @@
+{
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"module": "CommonJS",
+		"target": "es5",
+		"lib": ["dom", "es5", "es6", "es7"],
+		"jsx": "react",
+		"jsxFactory": "RxLeviathan.create",
+		"moduleResolution": "node",
+		"noEmit": true,
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"inlineSourceMap": true,
+		"types": [
+			"node",
+			"mocha",
+			"sinon",
+			"chai"
+		]
+	},
+	"include": [
+		"./@types",
+		"lib/**/*",
+		"test/**/*"
+	],
+	"exclude": [
+		"./node_modules",
+		"rollup.config.js",
+		"dist",
+		"config"
+	]
+}

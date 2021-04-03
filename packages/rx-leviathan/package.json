@@ -1,90 +1,85 @@
 {
   "name": "@nahuelio/rx-leviathan",
   "version": "1.0.0",
-  "description": "Experimental project for building reactive applications",
+  "description": "Experimental Compiler for creating reactive applications",
   "keywords": [
     "leviathan",
-    "rxjs",
-    "incremental-dom",
+    "compiler",
     "reactive"
   ],
   "author": "Patricio Ferreira <3dimentionar@gmail.com>",
   "homepage": "https://github.com/nahuelio/rx-leviathan/tree/master/packages/rx-leviathan#readme",
   "license": "UNLICENSED",
-  "main": "./dist/rx-leviathan.js",
-  "types": "./lib/rx-leviathan.d.ts",
-  "browser": "./dist/rx-leviathan.min.js",
+  "main": "dist/rx-leviathan.js",
+  "module": "dist/system/rx-leviathan.js",
+  "types": "@types/rx-leviathan.d.ts",
+  "bin": {
+    "rxlc": "./bin/rxlc"
+  },
   "directories": {
     "lib": "lib",
     "test": "test"
   },
-  "files": [
-    "dist",
-    "LICENSE",
-    "CHANGELOG.md",
-    "README.md"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nahuelio/rx-leviathan.git"
-  },
+  "repository": "nahuelio/rx-leviathan",
   "scripts": {
-    "dev": "nodemon --exec \"rollup -c -w\"",
-    "build": "cross-env ENV=prod rollup -c && bundlewatch",
-    "test": "cross-env ENV=test mocha --config .mocharc.js --watch",
-    "coverage": "cross-env ENV=test nyc mocha --config ./.mocharc.js",
-    "release": "npm run build && babel-node release.js",
-    "docs": "documentation serve --watch lib/rx-leviathan.js"
+    "build-dev": "nodemon --exec \"rollup -c --silent\"",
+    "build": "cross-env ENV=prod rollup -c",
+    "test": "cross-env ENV=test nodemon --exec \"mocha --w --config .mocharc.js \"test/**/*.test.ts\"",
+    "coverage": "cross-env ENV=test nyc mocha --config .mocharc.js \"test/**/*.test.ts\""
   },
   "bugs": {
     "url": "https://github.com/nahuelio/rx-leviathan/issues"
   },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "exports": {
+    ".": {
+      "node": {
+        "require": "./dist/*.js",
+        "import": "./dist/*.js"
+      },
+      "default": "./dist/*.js"
+    }
+  },
+  "files": [
+    "@types/rx-leviathan.d.ts",
+    "dist/rx-leviathan.js",
+    "dist/rxlc.js",
+    "bin"
+  ],
   "nyc": {
-    "include": [
-      "lib/**/*.js"
-    ],
     "require": [
-      "@babel/register"
-    ],
-    "extension": [
-      ".js"
+      "ts-node/register"
     ],
     "reporter": [
-      "lcov"
+      "lcov",
+      "text"
     ],
+    "extension": [
+      ".ts"
+    ],
+    "include": [
+      "lib/**/*.ts"
+    ],
+    "exclude": [
+      "**/*/*.d.ts"
+    ],
+    "temp-dir": ".cache",
+    "report-dir": "coverage",
+    "cache": true,
     "sourceMap": true,
+    "all": true,
     "instrument": true
   },
-  "bundlewatch": {
-    "files": [
-      {
-        "path": "./dist/rx-leviathan.min.js",
-        "maxSize": "6kB"
-      }
-    ]
-  },
-  "publishConfig": {
-    "access": "public"
+  "dependencies": {
+    "@nahuelio/rx-leviathan-utils": "1.0.0",
+    "extend": "3.0.2",
+    "json5": "2.2.0",
+    "sander": "0.6.0",
+    "fs-extra": "9.1.0"
   },
   "devDependencies": {
-    "@babel/cli": "7.11.6",
-    "@babel/core": "7.11.6",
-    "@babel/node": "7.10.5",
-    "@babel/plugin-proposal-class-properties": "7.10.4",
-    "@babel/plugin-proposal-decorators": "7.10.5",
-    "@babel/plugin-transform-runtime": "7.11.5",
-    "@babel/preset-env": "7.11.5",
-    "@babel/register": "7.11.5",
-    "@babel/runtime-corejs3": "7.11.2",
-    "@rollup/plugin-babel": "5.2.1",
-    "bundlewatch": "0.3.1",
-    "core-js": "3.6.5",
-    "documentation": "13.0.2",
-    "jsdom": "16.4.0",
-    "jsdom-global": "3.0.2"
-  },
-  "dependencies": {
-    "incremental-dom": "0.7.0",
-    "rxjs": "6.6.3"
+    "tslib": "2.1.0"
   }
 }

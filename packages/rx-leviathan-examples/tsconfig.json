@@ -1,16 +1,11 @@
 {
+	"extends": "../../tsconfig.json",
 	"compilerOptions": {
-		"target": "es5",
 		"lib": ["dom", "es5", "es6", "es7"],
-		"moduleResolution": "node",
 		"jsx": "react",
 		"jsxFactory": "RxLeviathan.create",
 		"inlineSourceMap": true,
-		"baseUrl": "./",
-		"noEmit": false,
-		"allowSyntheticDefaultImports": true,
-		"esModuleInterop": true,
-		"experimentalDecorators": true
+		"noEmit": false
 	},
 	"include": [
 		"./js/**/*",

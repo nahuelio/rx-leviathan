@@ -4,8 +4,8 @@
   "description": "leviathan examples",
   "keywords": [
     "leviathan",
+    "compiler",
     "reactive",
-    "incremental-dom",
     "examples"
   ],
   "author": "Patricio Ferreira <3dimentionar@gmail.com>",
@@ -39,14 +39,14 @@
     "url": "https://github.com/nahuelio/rx-leviathan/issues"
   },
   "dependencies": {
-    "@nahuelio/rx-leviathan": "1.0.0",
     "compression": "1.7.4",
-    "ejs": "3.1.5",
+    "ejs": "3.1.6",
     "express": "4.17.1",
-    "systemjs": "6.6.1",
-    "underscore": "1.11.0"
+    "systemjs": "6.8.3",
+    "underscore": "1.12.1"
   },
   "devDependencies": {
+    "@nahuelio/rx-leviathan": "1.0.0",
     "@types/systemjs": "6.1.0"
   }
 }

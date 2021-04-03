@@ -1,0 +1,15 @@
+{
+	"compilerOptions": {
+		"moduleResolution": "node",
+		"module": "CommonJS",
+		"target": "es5",
+		"lib": ["dom", "es5", "es6", "es7"],
+		"noEmit": true,
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"experimentalDecorators": true
+	},
+	"exclude": [
+		"node_modules"
+	]
+}

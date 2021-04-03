@@ -1,33 +1,27 @@
 /**
- * Common Profile Configuration
+ * Rollup Common Environment Configuration
  * @author Patricio Ferreira <3dimentionar@gmail.com>
  */
 const replace = require('rollup-plugin-replace');
 const commonjs = require('@rollup/plugin-commonjs');
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
-const { babel } = require('@rollup/plugin-babel');
+const typescript = require('@rollup/plugin-typescript');
 
-/**
- * Common Output Configuration
- */
-const output = {
-	dir: './dist',
-	format: 'umd',
-	name: 'rx-leviathan',
-	exports: 'named'
+module.exports = {
+	input: {
+		'rxlc': './lib/rxlc.ts',
+		'rx-leviathan': './lib/rx-leviathan.ts'
+	},
+	output: {
+		dir: './dist',
+		entryFileNames: '[name].js',
+		exports: 'named'
+	},
+	external: ['process', 'rxjs'],
+	plugins: {
+		replace,
+		nodeResolve,
+		commonjs,
+		typescript
+	}
 };
-
-/**
- * Common Plugins Configuration
- */
-const plugins = [
-	replace({
-		'process.env.npm_package_name': JSON.stringify(process.env.npm_package_name),
-		'process.env.npm_package_version': JSON.stringify(process.env.npm_package_version)
-	}),
-	nodeResolve(),
-	commonjs(),
-	babel({ babelHelpers: 'bundled' })
-];
-
-module.exports = { output, plugins };
