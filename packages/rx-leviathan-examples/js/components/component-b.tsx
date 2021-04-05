@@ -1,16 +1,16 @@
 import RxLeviathan, { Maybe, PartialPick, Subscribes, Component } from '@nahuelio/rx-leviathan';
-import { CounterStore, CounterStoreProps } from '../store/counter';
+import { CounterStore } from '../store/counter';
 
-type ComponentBProps = PartialPick<HTMLElement, 'className'> & CounterStoreProps;
+export type ComponentBProps = { className?: string } & CounterStore;
 
 @Subscribes(CounterStore)
-export class ComponentB extends Component<ComponentBProps, CounterStore> {
+export class ComponentB extends Component<ComponentBProps> {
 	increase() {
-		this.dispatch('increase');
+		this.props.increase();
 	}
 
 	decrease() {
-		this.dispatch('decrease');
+		this.props.decrease();
 	}
 
 	render(): Maybe<JSX.RxLeviathanElement> {
@@ -18,8 +18,8 @@ export class ComponentB extends Component<ComponentBProps, CounterStore> {
 		return <div className={`${className}`}>
 			<h4>Component B</h4>
 			<span>Counter {counter ? 'counter exists' : 'counter does not exists'}</span>
-			<button onclick={this.increase}>+</button>
-			<button onclick={this.decrease}>-</button>
+			<button onclick={this.props.increase}>+</button>
+			<button onclick={this.props.decrease}>-</button>
 		</div>;
 	}
 }

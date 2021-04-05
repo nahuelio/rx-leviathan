@@ -1,25 +1,16 @@
-import RxLeviathan, { Maybe, PartialPick, Subscribes, SubscriptionHash, Component } from '@nahuelio/rx-leviathan';
+import RxLeviathan, { Maybe, PartialPick, Subscribes, Component } from '@nahuelio/rx-leviathan';
+import { ViewStore } from '../store/view';
 import { CounterStore } from '../store/counter';
-import { GreetingStore } from '../store/greeting';
 
-type ComponentAProps = PartialPick<HTMLElement, 'className' | 'onclick'>;
+export type ComponentAProps = PartialPick<ViewStore & CounterStore, 'className' | 'counter'>;
 
-@Subscribes(CounterStore, GreetingStore)
-export class ComponentA<P extends ComponentAProps> extends Component<CounterStore & GreetingStore> {
-	readonly subscriptions: SubscriptionHash = {
-		greeting: null,
-		counter: this.onCounterChange
-	};
-
-	onCounterChange(subscriber: Component<ComponentAProps>) {
-		console.log(subscriber);
-	}
-
+@Subscribes(ViewStore, CounterStore)
+export class ComponentA extends Component<ComponentAProps> {
 	render(): Maybe<JSX.RxLeviathanElement> {
 		return (
 			<div className={`flex flex-column pa3 ba ${this.props.className}`}>
 				<h2 className={`ma0`}>Component A</h2>
-				<p>Description</p>
+				<p>Count: {this.props.counter}</p>
 			</div>
 		);
 	}

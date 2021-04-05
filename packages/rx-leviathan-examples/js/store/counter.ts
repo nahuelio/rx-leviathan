@@ -1,7 +1,7 @@
-import { Action, Observable, Store } from '@nahuelio/rx-leviathan';
+import { Maybe, Action, Observable, Store } from '@nahuelio/rx-leviathan';
 
-export type CounterStoreProps = {
-	counter: number;
+type CounterProps = {
+	counter?: Maybe<number>;
 };
 
 /**
@@ -9,10 +9,14 @@ export type CounterStoreProps = {
  * @class {CounterStore}
  */
 @Observable
-export class CounterStore extends Store {
-	state: CounterStoreProps = {
+export class CounterStore extends Store<CounterProps> {
+	protected state: CounterProps = {
 		counter: 1
 	};
+
+	get counter(): Maybe<number> {
+		return this.state.counter;
+	}
 
 	@Action
 	public increase(): void {

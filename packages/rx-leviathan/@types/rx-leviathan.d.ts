@@ -8,7 +8,7 @@ export = RxLeviathan;
 declare namespace RxLeviathan {
 	/** Helper Types **/
 
-	type Maybe<T> = T | null;
+	type Maybe<T> = T | null | undefined;
 	type PartialPick<T, K extends keyof T> = T | Partial<Pick<T, K>>;
 
 	/** Types **/
@@ -16,30 +16,24 @@ declare namespace RxLeviathan {
 	type RxLeviathanKey = string | number | null;
 	type RxLeviathanAttributes<T> = { [P in keyof T]: any };
 
-	type Props<T = {}> = { [K in keyof Partial<T>]: any; };
-	type StoreAction<S> = keyof Omit<S, 'state'>;
-	type RxLeviathanElements = Store | Component<Props>;
-	type SubscriptionHash<P> = {
-		[K in keyof P]: Maybe<<V extends Component<P>>(subscriber: V) => any> | undefined
+	type Props = Record<string, Maybe<any> | undefined>;
+	type RxLeviathanElements = Store<Props> | Component<Store<any>>;
+	type ReactiveHash<S> = {
+		[K in keyof S]: Maybe<<C extends Component<S>>(subscriber: C) => any> | undefined
 	};
 
 	/** Store Module **/
-
-	interface Store {}
-	class Store {
-		readonly state: Props;
-		constructor(initial: Maybe<Props>);
-	}
+	interface Store<P = {}> {}
+	class Store<P = {}> { protected state: P; }
 
 	/** Component Module **/
 
-	interface Component<P extends Props, S = Store> {}
-	class Component<P, S> {
-		readonly props: P;
-		readonly subscriptions: SubscriptionHash<P>;
-		dispatch(action: StoreAction<S>, ...params: any[]): Component<P>;
+	interface Component<S = {}> {}
+	class Component<S = {}> {
+		readonly props: { [K in keyof S]: S[K] };
+		private $: ReactiveHash<S>;
 		render(): Maybe<JSX.RxLeviathanElement>;
-		constructor(props?: Maybe<P>);
+		constructor(props?: Maybe<S>);
 	}
 
 	/** Top-Level Module **/
@@ -50,9 +44,9 @@ declare namespace RxLeviathan {
 	/** Decorators **/
 
 	// Class Decorator / Function
-	function Subscribes<V extends Function>(...stores: typeof Store[]): V;
+	function Subscribes<C extends Function>(...stores: Function[]): C;
 	// Class Decorator / Function
-	function Observable<S extends typeof Store>(ctor: S): S;
+	function Observable<S = Store>(ctor: S): S;
 	// Method Decorator / Function
 	function Action(target: any, propertyKey: string, descriptor: PropertyDescriptor): PropertyDescriptor;
 
